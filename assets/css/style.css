@@ -436,7 +436,7 @@ section .container {
   margin-right: 10px;
 }
 
-.about-me .content ul i {
+.about-me .content ul i { 
   font-size: 16px;
   margin-right: 5px;
   color: #18d26e;

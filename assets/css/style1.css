@@ -6,14 +6,25 @@ body {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     -webkit-user-select: none; /* Safari */
+    pointer-events: none; /* Disable pointer events */
+    -webkit-user-drag: none; /* Disable dragging for Safari */
+    -webkit-touch-callout: none; /* Disable long-touch menu for iOS */
     
+
+}
+.image-grid{
+   
+    position: relative;
 }
 
-.image-row {
+.image-grid-row {
+   
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 10px 10px;
+    position: relative;
+    gap: 10px;
 }
 
 img {
@@ -34,6 +45,36 @@ img:hover {
     transition: box-shadow 0.8s ease;
 }
 
+
+
+ /* Style for title section */
+ .title-section {
+    background: #000000 url("../img/certificateBG.jpeg") top right no-repeat; /* Replace 'path/to/your/background/image.jpg' with your image path */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    background-color: #f0f0f0;
+    padding: 40px;
+    text-align: center;
+    width: 93%;
+    height: 200px; /* Adjust height as needed */
+    margin-bottom: 20px;
+    padding-left: 50px;
+    
+
+}
+
+
+
+.title-section h1 {
+    
+    margin: 0;
+    font-size: 70px;
+    color: #ffffff;
+}
+
 @media screen and (min-width: 768px) {
     .image-row {
         justify-content: space-between;
@@ -42,7 +83,24 @@ img:hover {
     img {
         
         max-width: 30%;
+
         
+    }
+
+    
+}
+
+@media screen and (max-width: 768px) {
+
+    .title-section h1{
+        font-size: 50px;
+    }
+
+    .title-section {
+        padding: 20px;
+        text-align: center;
+        width: 89%;
+        height: 150px; /* Adjust height as needed */
     }
 }
 
