@@ -9,6 +9,7 @@ body {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   -webkit-user-select: none; /* Safari */
+  
 }
 
 body::before {
@@ -399,15 +400,25 @@ section .container {
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
+
+
+
 .about-me .content h3 {
   font-weight: 700;
   font-size: 26px;
   color: #18d26e;
+
+  
+
 }
 
 .about-me .content ul {
   list-style: none;
   padding: 0;
+  user-select: text; /* CSS3 standard */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* Internet Explorer/Edge */
+  -webkit-user-select: text; /* Safari */
 }
 
 .about-me .content ul li {
@@ -819,6 +830,7 @@ section .container {
 
 .resume .resume-item ul li {
   padding-bottom: 10px;
+  
 }
 
 .resume .resume-item:last-child {
@@ -1171,6 +1183,7 @@ section .container {
   color: rgba(255, 255, 255, 0.5);
   font-weight: 700;
   margin: 10px 0 8px 68px;
+  
 }
 
 .contact .info-box p {
@@ -1179,11 +1192,14 @@ section .container {
   line-height: 24px;
   font-size: 14px;
   margin: 0 0 0 68px;
+  
+  
 }
 
 .contact .info-box .social-links {
   margin: 5px 0 0 68px;
   display: flex;
+  
 }
 
 .contact .info-box .social-links a {
