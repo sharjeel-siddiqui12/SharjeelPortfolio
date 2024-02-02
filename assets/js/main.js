@@ -250,3 +250,11 @@
   new PureCounter();
 
 })()
+
+ // Disable right-click on the page
+ window.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+}, false);
+
+
+

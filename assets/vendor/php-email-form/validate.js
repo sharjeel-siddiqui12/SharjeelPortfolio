@@ -1,8 +1,4 @@
-/**
-* PHP Email Form Validation - v3.5
-* URL: https://bootstrapmade.com/php-email-form/
-* Author: BootstrapMade.com
-*/
+
 (function () {
   "use strict";
 
@@ -64,7 +60,8 @@
         thisForm.querySelector('.sent-message').classList.add('d-block');
         thisForm.reset(); 
       } else {
-        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
+        // throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action);
+        throw new Error(data ? data : 'Sorry Contact Form is not functional yet. You can contact via mail or whatsapp.'); 
       }
     })
     .catch((error) => {
