@@ -419,12 +419,17 @@ section .container {
   -moz-user-select: text; /* Firefox */
   -ms-user-select: text; /* Internet Explorer/Edge */
   -webkit-user-select: text; /* Safari */
+ 
 }
 
 .about-me .content ul li {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  user-select: text; /* CSS3 standard */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* Internet Explorer/Edge */
+  -webkit-user-select: text; /* Safari */
 }
 
 .about-me .content ul strong {
