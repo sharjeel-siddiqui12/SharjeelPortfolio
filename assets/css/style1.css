@@ -8,7 +8,7 @@ body {
     -webkit-user-select: none; /* Safari */
     pointer-events: none; /* Disable pointer events */
     -webkit-user-drag: none; /* Disable dragging for Safari */
-    -webkit-touch-callout: none; /* Disable long-touch menu for iOS */
+    -webkit-touch-callout: none; 
     
 
 }
