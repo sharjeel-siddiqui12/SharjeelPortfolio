@@ -268,7 +268,7 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.ctrlKey && event.key === 'U') {
+  if (event.ctrlKey && event.key === 'u') {
       event.preventDefault(); // Prevent default behavior
   }
 });
