@@ -257,4 +257,15 @@
 }, false);
 
 
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+      event.preventDefault(); // Prevent default behavior
+  }
+});
+
+document.addEventListener('contextmenu', function(event) {
+  event.preventDefault(); // Prevent the context menu from opening
+});
+
+
 
