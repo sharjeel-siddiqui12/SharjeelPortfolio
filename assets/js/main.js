@@ -267,5 +267,9 @@ document.addEventListener('contextmenu', function(event) {
   event.preventDefault(); // Prevent the context menu from opening
 });
 
-
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.key === 'U') {
+      event.preventDefault(); // Prevent default behavior
+  }
+});
 
