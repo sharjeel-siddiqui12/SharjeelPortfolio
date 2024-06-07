@@ -246,15 +246,14 @@
 
 })()
 
- // Disable right-click on the page
- window.addEventListener('contextmenu', function (e) {
+// Disable right-click on the page
+window.addEventListener('contextmenu', function (e) {
   e.preventDefault();
 }, false);
 
-
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && event.shiftKey && event.key === 'I') {
-      event.preventDefault(); // Prevent default behavior
+    event.preventDefault(); // Prevent default behavior
   }
 });
 
@@ -264,7 +263,14 @@ document.addEventListener('contextmenu', function(event) {
 
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && event.key === 'u') {
-      event.preventDefault(); // Prevent default behavior
+    event.preventDefault(); // Prevent default behavior
+  }
+});
+
+// Disable F12 key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'F12' || event.keyCode === 123) {
+    event.preventDefault(); // Prevent default behavior
   }
 });
 
