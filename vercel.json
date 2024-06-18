@@ -3,6 +3,11 @@
       {
         "source": "/github",
         "destination": "/github.html"
+        
+      },
+      {
+        "source": "/git",
+        "destination": "/github.html"
       }
     ]
   }
