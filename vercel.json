@@ -2,12 +2,19 @@
     "rewrites": [
       {
         "source": "/github",
-        "destination": "/github.html"
-        
+        "destination": "/redirect.html"
       },
       {
         "source": "/git",
-        "destination": "/github.html"
+        "destination": "/redirect.html"
+      },
+      {
+        "source": "/facebook",
+        "destination": "/redirect.html"
+      },
+      {
+        "source": "/instagram",
+        "destination": "/redirect.html"
       }
     ]
   }
