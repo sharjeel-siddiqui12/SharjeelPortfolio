@@ -10,19 +10,47 @@
       },
       {
         "source": "/facebook",
-        "destination": "/redirect.html"
+        "destination": "socials/facebook.html"
       },
       {
         "source": "/fb",
-        "destination": "/redirect.html"
+        "destination": "socials/facebook.html"
       },
       {
         "source": "/insta",
-        "destination": "/redirect.html"
+        "destination": "socials/instagram.html"
       },
       {
         "source": "/instagram",
-        "destination": "/redirect.html"
+        "destination": "socials/instagram.html"
+      },
+      {
+        "source": "/twitter",
+        "destination": "socials/twitter.html"
+      },
+      {
+        "source": "/x",
+        "destination": "socials/twitter.html"
+      },
+      {
+        "source": "/X",
+        "destination": "socials/twitter.html"
+      },
+      {
+        "source": "/linkedin",
+        "destination": "socials/linkedin.html"
+      },
+      {
+        "source": "/LinkedIn",
+        "destination": "socials/linkedin.html"
+      },
+      {
+        "source": "/linkedIn",
+        "destination": "socials/linkedin.html"
+      },
+      {
+        "source": "/Linkedin",
+        "destination": "socials/linkedin.html"
       }
     ]
   }
