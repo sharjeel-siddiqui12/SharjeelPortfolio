@@ -2,11 +2,11 @@
     "rewrites": [
       {
         "source": "/github",
-        "destination": "/redirect.html"
+        "destination": "social/github.html"
       },
       {
         "source": "/git",
-        "destination": "/redirect.html"
+        "destination": "social/github.html"
       },
       {
         "source": "/facebook",
