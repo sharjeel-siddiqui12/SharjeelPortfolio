@@ -51,6 +51,22 @@
       {
         "source": "/Linkedin",
         "destination": "socials/linkedin.html"
+      },
+      {
+        "source": "/certificates",
+        "destination": "certificates.html"
+      },
+      {
+        "source": "/certificate",
+        "destination": "certificates.html"
+      },
+      {
+        "source": "/Certificates",
+        "destination": "certificates.html"
+      },
+      {
+        "source": "/Certificate",
+        "destination": "certificates.html"
       }
     ]
   }
