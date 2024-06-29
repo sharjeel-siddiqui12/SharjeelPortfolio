@@ -27,6 +27,7 @@ body::before {
 @media (min-width: 1024px) {
   body::before {
     background-attachment: fixed;
+    background: local;
   }
 }
 
