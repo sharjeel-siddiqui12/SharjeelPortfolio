@@ -15,7 +15,7 @@ body::before {
   content: "";
   position: fixed;
   background: #000000 url("../img/bg.jpg") no-repeat center center;
-  background-size: cover;
+  background-size: 120%; /* Increase background size by 20% */
   left: 0;
   right: 0;
   top: 0;
@@ -25,14 +25,14 @@ body::before {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   body::before {
-    background-size: cover;
+    background-size: 120%; /* Increase background size by 20% */
     background-position: center;
   }
 }
 
 @media (max-width: 767px) {
   body::before {
-    background-size: contain;
+    background-size: 120%; /* Increase background size by 20% */
     background-position: center;
   }
 }
@@ -40,7 +40,7 @@ body::before {
 @media (min-width: 1024px) {
   body::before {
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 120%; /* Increase background size by 20% */
     background-position: top right;
   }
 }
