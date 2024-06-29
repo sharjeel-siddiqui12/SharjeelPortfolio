@@ -14,9 +14,8 @@ body {
 body::before {
   content: "";
   position: fixed;
-  background: #000000 url("../img/bg.jpg") top right no-repeat;
+  background: #000000 url("../img/bg.jpg") no-repeat center center;
   background-size: cover; /* Ensure the image covers the entire background */
-  background-position: center; /* Center the background image */
   left: 0;
   right: 0;
   top: 0;
