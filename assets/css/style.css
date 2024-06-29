@@ -23,6 +23,20 @@ body::before {
   z-index: -1;
 }
 
+@media (max-width: 767px) {
+  body::before {
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center center; /* Center the background image on smaller screens */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  body::before {
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center center; /* Center the background image on medium screens */
+  }
+}
+
 @media (min-width: 1024px) {
   body::before {
     background-attachment: fixed;
@@ -30,6 +44,7 @@ body::before {
     background-position: top right; /* Adjust position for larger screens if needed */
   }
 }
+
 
 
 
