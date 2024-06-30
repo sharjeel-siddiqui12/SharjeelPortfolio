@@ -274,3 +274,10 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+
+  document.querySelector('.php-email-form.mt-4').addEventListener('submit', function(event) {
+   
+    setTimeout(() => {
+      this.reset(); // This will reset the form to its default values after 5 seconds
+  }, 1000);
+});

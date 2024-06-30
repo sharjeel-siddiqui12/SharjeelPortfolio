@@ -518,7 +518,8 @@
         </div>
       </div>
 
-      <form onsubmit="sendEmail(); reset(); return false;"  class="php-email-form mt-4">
+      <form action="https://api.web3forms.com/submit" method="POST" class="php-email-form mt-4">
+        <input type="hidden" name="access_key" value="38da16c3-0004-4b57-a127-fe273895dec2">
         <div class="row">
           <div class="col-md-6 form-group">
             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -538,7 +539,7 @@
           <div class="error-message"></div>
           <div class="sent-message">Your message has been sent. Thank you!</div>
         </div>
-        <div class="text-center"><button type="submit">Send Message</button></div>
+        <div class="text-center"><button type="submit" value="submit">Send Message</button></div>
       </form>
 
 
@@ -547,7 +548,7 @@
     </div>
   </section><!-- End Contact Section -->
 
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <!-- <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script>
     function sendEmail(){
           Email.send({
@@ -562,9 +563,10 @@
         message => alert(message)
       );
     }
-  </script>
+  </script> -->
 
   <!-- Vendor JS Files -->
+
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -575,6 +577,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 
