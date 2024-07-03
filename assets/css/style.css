@@ -1,3 +1,6 @@
+*{
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: "Open Sans", sans-serif;
@@ -1383,6 +1386,21 @@ section .container {
 .credits a:hover {
   color: #fff;
 }
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background-color: #e6e6e6;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #15bb62;
+  border-radius: 50px;
+  scroll-behavior: smooth;
+}
+
 
 
 
