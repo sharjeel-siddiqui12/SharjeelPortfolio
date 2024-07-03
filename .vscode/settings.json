@@ -1,3 +1,11 @@
 {
-    "liveServer.settings.port": 5502
+    "liveServer.settings.port": 5502,
+    "editor.cursorBlinking": "smooth",
+    "editor.renderWhitespace": "selection",
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "off",
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": false,
+    "editor.cursorSmoothCaretAnimation": "off",
+    "editor.cursorSurroundingLinesStyle": "default",
+    "workbench.activityBar.iconClickBehavior": "toggle"
 }
