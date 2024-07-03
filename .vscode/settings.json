@@ -8,4 +8,5 @@
     "editor.cursorSmoothCaretAnimation": "off",
     "editor.cursorSurroundingLinesStyle": "default",
     "workbench.activityBar.iconClickBehavior": "toggle"
+    
 }
