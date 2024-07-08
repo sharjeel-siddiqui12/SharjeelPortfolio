@@ -433,6 +433,10 @@ section .container {
 
 }
 
+.img-fluid{
+  border-radius: 20px;
+}
+
 .about-me .content ul {
   list-style: none;
   padding: 0;

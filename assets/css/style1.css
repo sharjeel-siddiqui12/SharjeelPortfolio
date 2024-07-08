@@ -53,20 +53,22 @@ img:hover {
 
  /* Style for title section */
  .title-section {
+     /* border-image: fill 0 linear-gradient(#0001, #000); */
     background: #ffffff url("../img/certificateBG.jpeg") top right no-repeat; /* Replace 'path/to/your/background/image.jpg' with your image path */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
     background-size: cover; /* Cover the entire container */
     background-position: center; /* Center the background image */
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     padding: 40px;
-    text-align: center;
+    /* text-align: center; */
     width: 93%;
     height: 400px;
     margin-bottom: 30px;
     padding-left: 50px;
     border-radius: 13px;
+
 }
 
 

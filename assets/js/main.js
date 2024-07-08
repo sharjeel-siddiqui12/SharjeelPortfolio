@@ -281,3 +281,22 @@ document.addEventListener('keydown', function(event) {
       this.reset(); // This will reset the form to its default values after 5 seconds
   }, 1000);
 });
+
+
+function calculateAge(birthdate) {
+  const today = new Date();
+  const birthDate = new Date(birthdate);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+// Birthday
+const birthday = '2002-11-18';
+
+// Calculate age and display it
+const ageElement = document.getElementById('age').querySelector('span');
+ageElement.textContent = calculateAge(birthday);
