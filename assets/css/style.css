@@ -17,7 +17,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  background: #000000 url("../img/bg.jpg") no-repeat center center;
+  background: #000000 url("../img/bg.webp") no-repeat center center;
   background-size: cover; 
   left: 0;
   right: 0;
