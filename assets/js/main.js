@@ -294,7 +294,6 @@ function calculateAge(birthdate) {
   return age;
 }
 
-// Birthday
 const birthday = '2002-11-18';
 
 // Calculate age and display it
