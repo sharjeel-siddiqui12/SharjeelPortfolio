@@ -296,6 +296,5 @@ function calculateAge(birthdate) {
 
 const birthday = '2002-11-18';
 
-// Calculate age and display it
 const ageElement = document.getElementById('age').querySelector('span');
 ageElement.textContent = calculateAge(birthday);
