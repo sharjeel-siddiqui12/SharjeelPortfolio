@@ -2,3 +2,15 @@ User-agent: *
 Disallow: /private/
 Disallow: /admin/
 Disallow: /secret-page.html
+
+User-agent: Googlebot
+Disallow: /images/
+Allow: /images/public/
+
+User-agent: Bingbot
+Disallow: /private/
+Disallow: /admin/
+Disallow: /secret-page.html
+Crawl-delay: 5
+
+Sitemap: https://example.com/sitemap.xml
