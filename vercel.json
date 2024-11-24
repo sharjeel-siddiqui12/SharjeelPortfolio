@@ -71,6 +71,10 @@
       {
         "source": "/dm",
         "destination": "cnn.html"
+      },
+      {
+        "source": "/DM",
+        "destination": "cnn.html"
       }
     ]
   }
