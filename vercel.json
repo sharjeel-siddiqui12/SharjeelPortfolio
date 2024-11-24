@@ -67,6 +67,10 @@
       {
         "source": "/Certificate",
         "destination": "certificates.html"
+      },
+      {
+        "source": "/dm",
+        "destination": "cnn.html"
       }
     ]
   }
