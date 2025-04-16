@@ -70,11 +70,11 @@
       },
       {
         "source": "/cs",
-        "destination": "https://www.canva.com/design/DAGip-Lhzz0/DeULS-PbK3YcZtqAWD3x6g/edit"
+        "destination": "cnn.html"
       },
       {
         "source": "/CS",
-        "destination": "https://www.canva.com/design/DAGip-Lhzz0/DeULS-PbK3YcZtqAWD3x6g/edit"
+        "destination": "cnn.html"
       }
     ]
   }
