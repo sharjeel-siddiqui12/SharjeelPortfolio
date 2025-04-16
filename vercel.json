@@ -69,12 +69,12 @@
         "destination": "certificates.html"
       },
       {
-        "source": "/dm",
-        "destination": "cnn.html"
+        "source": "/cs",
+        "destination": "https://www.canva.com/design/DAGip-Lhzz0/DeULS-PbK3YcZtqAWD3x6g/edit"
       },
       {
-        "source": "/DM",
-        "destination": "cnn.html"
+        "source": "/CS",
+        "destination": "https://www.canva.com/design/DAGip-Lhzz0/DeULS-PbK3YcZtqAWD3x6g/edit"
       }
     ]
   }
