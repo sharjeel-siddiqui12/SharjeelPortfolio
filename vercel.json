@@ -1,86 +1,22 @@
 {
-  "name": "my-project",
-  "version": "1.0.0",
-  "engines": {
-    "node": "24.x"
-  },
   "rewrites": [
-      {
-        "source": "/github",
-        "destination": "socials/github.html"
-      },
-      {
-        "source": "/git",
-        "destination": "socials/github.html"
-      },
-      {
-        "source": "/facebook",
-        "destination": "socials/facebook.html"
-      },
-      {
-        "source": "/fb",
-        "destination": "socials/facebook.html"
-      },
-      {
-        "source": "/insta",
-        "destination": "socials/instagram.html"
-      },
-      {
-        "source": "/instagram",
-        "destination": "socials/instagram.html"
-      },
-      {
-        "source": "/twitter",
-        "destination": "socials/twitter.html"
-      },
-      {
-        "source": "/x",
-        "destination": "socials/twitter.html"
-      },
-      {
-        "source": "/X",
-        "destination": "socials/twitter.html"
-      },
-      {
-        "source": "/linkedin",
-        "destination": "socials/linkedin.html"
-      },
-      {
-        "source": "/LinkedIn",
-        "destination": "socials/linkedin.html"
-      },
-      {
-        "source": "/linkedIn",
-        "destination": "socials/linkedin.html"
-      },
-      {
-        "source": "/Linkedin",
-        "destination": "socials/linkedin.html"
-      },
-      {
-        "source": "/certificates",
-        "destination": "certificates.html"
-      },
-      {
-        "source": "/certificate",
-        "destination": "certificates.html"
-      },
-      {
-        "source": "/Certificates",
-        "destination": "certificates.html"
-      },
-      {
-        "source": "/Certificate",
-        "destination": "certificates.html"
-      },
-      {
-        "source": "/cs",
-        "destination": "cnn.html"
-      },
-      {
-        "source": "/CS",
-        "destination": "cnn.html"
-      }
-    ]
-  }
-  
+    { "source": "/github", "destination": "/socials/github.html" },
+    { "source": "/git", "destination": "/socials/github.html" },
+
+    { "source": "/facebook", "destination": "/socials/facebook.html" },
+    { "source": "/fb", "destination": "/socials/facebook.html" },
+
+    { "source": "/insta", "destination": "/socials/instagram.html" },
+    { "source": "/instagram", "destination": "/socials/instagram.html" },
+
+    { "source": "/twitter", "destination": "/socials/twitter.html" },
+    { "source": "/x", "destination": "/socials/twitter.html" },
+
+    { "source": "/linkedin", "destination": "/socials/linkedin.html" },
+
+    { "source": "/certificates", "destination": "/certificates.html" },
+    { "source": "/certificate", "destination": "/certificates.html" },
+
+    { "source": "/cs", "destination": "/cnn.html" }
+  ]
+}
