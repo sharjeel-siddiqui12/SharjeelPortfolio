@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://sharjeelsiddiqui.info/sitemap.xml
+Host: https://sharjeelsiddiqui.info
