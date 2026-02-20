@@ -130,7 +130,7 @@ export function ProjectsSection() {
         {/* View All Projects */}
         <SectionReveal delay={0.4}>
           <div className="mt-12 flex justify-center">
-            <Link href="/projects">
+            <Link href="/projects" target="_blank">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
