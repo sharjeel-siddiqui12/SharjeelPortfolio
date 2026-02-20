@@ -49,16 +49,16 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
-        {/* Greeting */}
+      {/* <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
+        Greeting
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="rounded-full border border-neutral-200 bg-white/50 px-4 py-1.5  text-sm text-neutral-600 backdrop-blur-sm dark:border-white/[0.1] dark:bg-black/50 dark:text-neutral-400"
         >
-          {/* 👋 Welcome to my portfolio */}
-        </motion.div>
+          👋 Welcome to my portfolio
+        </motion.div> */}
 
         {/* Name */}
         <motion.h1
