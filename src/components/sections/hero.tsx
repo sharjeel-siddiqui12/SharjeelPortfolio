@@ -49,8 +49,8 @@ export function HeroSection() {
         }}
       />
 
-      {/* <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
-        Greeting
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
+        {/* Greeting
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
