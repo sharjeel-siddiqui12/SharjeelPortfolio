@@ -57,7 +57,7 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="rounded-full border border-neutral-200 bg-white/50 px-4 py-1.5  text-sm text-neutral-600 backdrop-blur-sm dark:border-white/[0.1] dark:bg-black/50 dark:text-neutral-400"
         >
-          👋 Welcome to my portfolio
+          {/* 👋 Welcome to my portfolio */}
         </motion.div>
 
         {/* Name */}
