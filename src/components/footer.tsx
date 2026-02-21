@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { navItems, contactInfo } from "@/data/portfolio-data";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaHeart } from "react-icons/fa";
+import { FloatingDots } from "@/components/ui/glow-effects";
+import { FaGithub, FaLinkedin, FaWhatsapp, FaHeart } from "react-icons/fa";
+import { SiGmail } from 'react-icons/si';
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub className="h-5 w-5" />,
   linkedin: <FaLinkedin className="h-5 w-5" />,
-  twitter: <FaTwitter className="h-5 w-5" />,
-  instagram: <FaInstagram className="h-5 w-5" />,
+  whatsapp: <FaWhatsapp className="h-5 w-5" />,
+  // instagram: <FaInstagram className="h-5 w-5" />,
+  mail: <SiGmail className="h-5 w-5" />,
 };
 
 export function Footer() {
@@ -17,6 +20,7 @@ export function Footer() {
     <footer className="relative border-t border-neutral-200 bg-white dark:border-white/[0.05] dark:bg-black">
       {/* Animated Divider */}
       <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+      <FloatingDots count={8} className="opacity-30" />
 
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-8">
         <div className="grid gap-8 md:grid-cols-3">
@@ -92,21 +96,22 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+            {/* <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
               {contactInfo.email}
-            </p>
+            </p> */}
           </motion.div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-6 dark:border-white/[0.05] md:flex-row">
           <p className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-500">
-            © {new Date().getFullYear()} Sharjeel Siddiqui. Made with{" "}
-            <FaHeart className="h-3 w-3 text-red-500" /> and Next.js
+            © {new Date().getFullYear()} 
+            <a href="https://sharjeelsiddiqui.info/" className="text-blue-500 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300">Sharjeel Siddiqui. </a>
+            All rights reserved. 
           </p>
-          <p className="text-xs text-neutral-400 dark:text-neutral-600">
+          {/* <p className="text-xs text-neutral-400 dark:text-neutral-600">
             Built with Next.js, Tailwind CSS & Framer Motion
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>

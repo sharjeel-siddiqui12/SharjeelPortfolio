@@ -4,6 +4,7 @@ import { experiences } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { Timeline } from "@/components/ui/timeline";
 import { GridBackground } from "@/components/ui/sparkles";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 
 export function ExperienceSection() {
@@ -11,13 +12,14 @@ export function ExperienceSection() {
     title: exp.duration,
     content: (
       <div className="space-y-4">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-white/[0.1] dark:bg-neutral-900"
-        >
+        <CardSpotlight className="shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="p-6"
+          >
           <div className="mb-3 flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
@@ -62,7 +64,8 @@ export function ExperienceSection() {
               </span>
             ))}
           </div>
-        </motion.div>
+          </motion.div>
+        </CardSpotlight>
       </div>
     ),
   }));

@@ -5,6 +5,7 @@ import { personalInfo, education } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { ThreeDCard, CardBody } from "@/components/ui/3d-card";
 import { DotBackground } from "@/components/ui/sparkles";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { FaGraduationCap, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
 import { useRef } from "react";
 
@@ -34,12 +35,13 @@ function EducationTimelineItem({
       <div className="absolute left-[13px] top-9 h-[calc(100%-1rem)] w-[2px] bg-gradient-to-b from-blue-500/40 to-transparent last:hidden" />
 
       {/* Card */}
-      <motion.div
-        whileHover={{ y: -3, scale: 1.01 }}
-        className="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-5 transition-all hover:shadow-lg hover:shadow-blue-500/5 dark:border-white/[0.1] dark:bg-neutral-900"
-      >
-        {/* Decorative accent */}
-        <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 opacity-0 transition-opacity group-hover:opacity-100" />
+      <CardSpotlight className="transition-all hover:shadow-lg hover:shadow-blue-500/10">
+        <motion.div
+          whileHover={{ y: -3 }}
+          className="relative p-5"
+        >
+          {/* Decorative accent */}
+          <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-xl bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 opacity-0 transition-opacity group-hover:opacity-100" />
 
         <div className="mb-2 flex items-center gap-2 text-sm font-medium text-blue-500">
           <FaCalendar className="h-3 w-3" />
@@ -67,7 +69,8 @@ function EducationTimelineItem({
             {edu.grade}
           </span>
         )}
-      </motion.div>
+        </motion.div>
+      </CardSpotlight>
     </motion.div>
   );
 }
@@ -92,7 +95,7 @@ export function AboutSection() {
         </SectionReveal>
 
         {/* About Content */}
-        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center">
           {/* Profile Image & Info */}
           <SectionReveal direction="left" delay={0.2}>
             <ThreeDCard className="mx-auto w-full max-w-md">
@@ -170,9 +173,9 @@ export function AboutSection() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 pt-4">
                 {[
-                  { number: "2+", label: "Years Exp." },
+                  { number: "2+", label: "Years Experience" },
                   { number: "10+", label: "Projects" },
-                  { number: "5+", label: "Technologies" },
+                  { number: "50+", label: "Certificates" },
                 ].map((stat, idx) => (
                   <motion.div
                     key={idx}

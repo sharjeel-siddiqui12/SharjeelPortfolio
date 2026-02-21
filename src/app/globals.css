@@ -63,6 +63,40 @@ body {
 }
 
 /* Meteor animation */
+@keyframes meteor-fall {
+  0% {
+    transform: translateX(0) translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(600px) translateY(600px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.animate-meteor-fall {
+  animation: meteor-fall linear infinite;
+}
+
+.animate-meteor-fall::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotate(180deg);
+  width: var(--tail-length, 120px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.7), rgba(147,197,253,0.4));
+  border-radius: 9999px;
+}
+
+/* Legacy meteor animation (kept for compatibility) */
 @keyframes meteor {
   0% {
     transform: rotate(215deg) translateX(0);

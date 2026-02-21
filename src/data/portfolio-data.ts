@@ -352,15 +352,16 @@ export const certificates: Certificate[] = [
 export const contactInfo: ContactInfo = {
   email: "contact@sharjeelsiddiqui.info",
   location: "Karachi, Pakistan",
+  phone: "+92 312 2723876",
   socialLinks: [
     {
       name: "GitHub",
-      url: "https://github.com/sharjeelsiddiqui",
+      url: "https://github.com/sharjeel-siddiqui12",
       icon: "github",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/sharjeelsiddiqui",
+      url: "https://www.linkedin.com/in/sharjeel-siddiqui-ss/",
       icon: "linkedin",
     },
     {

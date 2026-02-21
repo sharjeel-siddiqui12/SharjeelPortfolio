@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { projects } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import { MovingBorder } from "@/components/ui/decorative-effects";
 import { FaExternalLinkAlt, FaGithub, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 
@@ -131,14 +132,15 @@ export function ProjectsSection() {
         <SectionReveal delay={0.4}>
           <div className="mt-12 flex justify-center">
             <Link href="/projects" target="_blank">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.15] dark:bg-transparent dark:text-neutral-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+              <MovingBorder
+                borderRadius="9999px"
+                className="bg-white px-6 py-3 text-sm font-medium text-neutral-700 dark:bg-black dark:text-neutral-300"
               >
-                View All Projects
-                <FaArrowRight className="h-3 w-3" />
-              </motion.button>
+                <span className="flex items-center gap-2">
+                  View All Projects
+                  <FaArrowRight className="h-3 w-3" />
+                </span>
+              </MovingBorder>
             </Link>
           </div>
         </SectionReveal>

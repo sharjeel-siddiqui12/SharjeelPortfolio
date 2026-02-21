@@ -127,8 +127,8 @@ export default function RootLayout({
         },
         email: "contact@sharjeelsiddiqui.info",
         sameAs: [
-          "https://github.com/sharjeelsiddiqui",
-          "https://linkedin.com/in/sharjeelsiddiqui",
+          "https://github.com/sharjeel-siddiqui12",
+          "https://www.linkedin.com/in/sharjeel-siddiqui-ss/",
         ],
         knowsAbout: [
           "React.js",

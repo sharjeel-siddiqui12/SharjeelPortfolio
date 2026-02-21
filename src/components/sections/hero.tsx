@@ -2,17 +2,21 @@
 import { motion } from "framer-motion";
 import { personalInfo, contactInfo } from "@/data/portfolio-data";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import { Spotlight } from "@/components/ui/decorative-effects";
+import { Spotlight, Meteors } from "@/components/ui/decorative-effects";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { ShimmerButton } from "@/components/ui/decorative-effects";
-import { FaGithub, FaLinkedin, FaTwitter, FaArrowDown } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp, FaInstagram, FaArrowDown } from "react-icons/fa";
+import { SiGmail } from 'react-icons/si';
 import Link from "next/link";
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub className="h-5 w-5" />,
   linkedin: <FaLinkedin className="h-5 w-5" />,
-  twitter: <FaTwitter className="h-5 w-5" />,
+  whatsapp: <FaWhatsapp className="h-5 w-5" />,
+  // instagram: <FaInstagram className="h-5 w-5" />,
+  email: <SiGmail className="h-5 w-5" />,
+  mail: <SiGmail className="h-5 w-5" />,
 };
 
 export function HeroSection() {
@@ -38,6 +42,9 @@ export function HeroSection() {
 
       {/* Background Beams */}
       <BackgroundBeams />
+
+      {/* Meteors */}
+      <Meteors number={25} />
 
       {/* Grid background */}
       <div className="pointer-events-none absolute inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
@@ -132,7 +139,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 1 }}
           className="mt-4 flex gap-3"
         >
-          {contactInfo.socialLinks.slice(0, 3).map((link, idx) => (
+          {contactInfo.socialLinks.slice(0, 4).map((link, idx) => (
             <a
               key={idx}
               href={link.url}

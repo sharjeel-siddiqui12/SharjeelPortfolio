@@ -10,24 +10,37 @@ export const Meteors = ({
   number?: number;
   className?: string;
 }) => {
-  const meteors = new Array(number).fill(true);
+  const meteors = Array.from({ length: number }, (_, idx) => ({
+    id: idx,
+    top: Math.floor(Math.random() * 60) - 20,        // -20% to 40% from top
+    left: Math.floor(Math.random() * 120) - 10,       // -10% to 110% of width
+    delay: (Math.random() * 6).toFixed(2),
+    duration: (Math.random() * 6 + 4).toFixed(2),   // 4–10s
+    size: Math.random() * 1.5 + 0.5,                  // 0.5–2px head
+    tailLength: Math.floor(Math.random() * 120 + 80), // 80–200px tail
+  }));
 
   return (
     <>
-      {meteors.map((_, idx) => (
+      {meteors.map((m) => (
         <span
-          key={idx}
+          key={m.id}
           className={cn(
-            "absolute left-1/2 top-1/2 h-0.5 w-0.5 rotate-[215deg] animate-meteor rounded-[9999px] bg-slate-500 shadow-[0_0_0_1px_#ffffff10]",
-            "before:absolute before:top-1/2 before:h-[1px] before:w-[50px] before:-translate-y-[50%] before:transform before:bg-gradient-to-r before:from-[#64748b] before:to-transparent before:content-['']",
+            "pointer-events-none absolute animate-meteor-fall rounded-full bg-white",
+            "before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-full before:content-['']",
             className
           )}
           style={{
-            top: 0,
-            left: Math.floor(Math.random() * (400 - -400) + -400) + "px",
-            animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
-            animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
-          }}
+            top: `${m.top}%`,
+            left: `${m.left}%`,
+            width: `${m.size}px`,
+            height: `${m.size}px`,
+            animationDelay: `${m.delay}s`,
+            animationDuration: `${m.duration}s`,
+            boxShadow: `0 0 ${m.size * 4}px ${m.size}px rgba(255,255,255,0.6), 0 0 ${m.size * 8}px ${m.size * 2}px rgba(147,197,253,0.3)`,
+        
+            "--tail-length": `${m.tailLength}px`,
+          } as React.CSSProperties}
         />
       ))}
     </>

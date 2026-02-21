@@ -4,6 +4,7 @@ import { useState } from "react";
 import { contactInfo } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { ShimmerButton, Meteors } from "@/components/ui/decorative-effects";
+import { ParticlesBackground } from "@/components/ui/particles";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import {
   FaEnvelope,
@@ -13,13 +14,18 @@ import {
   FaTwitter,
   FaInstagram,
   FaPaperPlane,
+  FaWhatsapp,
+  FaPhone,
 } from "react-icons/fa";
+import { SiGmail } from 'react-icons/si';
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub className="h-5 w-5" />,
   linkedin: <FaLinkedin className="h-5 w-5" />,
   twitter: <FaTwitter className="h-5 w-5" />,
-  instagram: <FaInstagram className="h-5 w-5" />,
+  // instagram: <FaInstagram className="h-5 w-5" />,
+  whatsapp: <FaWhatsapp className="h-5 w-5" />,
+  mail: <SiGmail className="h-5 w-5" />,
 };
 
 export function ContactSection() {
@@ -74,6 +80,7 @@ export function ContactSection() {
       className="relative min-h-screen w-full overflow-hidden bg-neutral-50 px-4 py-20 dark:bg-neutral-950 md:px-8 md:py-32"
     >
       <BackgroundBeams className="opacity-40" />
+      <ParticlesBackground quantity={30} className="opacity-30" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionReveal>
@@ -122,6 +129,22 @@ export function ContactSection() {
                     <p className="text-sm text-neutral-500">Location</p>
                     <p className="text-sm font-medium text-neutral-900 dark:text-white">
                       {contactInfo.location}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-white/[0.1] dark:bg-neutral-900">
+                    <FaPhone className="h-5 w-5 text-blue-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-neutral-500">Phone</p>
+                    <p className="text-sm font-medium text-neutral-900 dark:text-white">
+                      <a
+                      href={`tel:${contactInfo.phone}`}
+                      className="text-sm font-medium text-neutral-900 hover:text-blue-500 dark:text-white dark:hover:text-blue-400"
+                    >
+                      {contactInfo.phone}
+                    </a>
                     </p>
                   </div>
                 </div>
