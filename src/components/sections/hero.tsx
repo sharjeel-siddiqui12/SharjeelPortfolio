@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import { personalInfo, contactInfo } from "@/data/portfolio-data";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import { Spotlight, Meteors } from "@/components/ui/decorative-effects";
+import { Spotlight } from "@/components/ui/decorative-effects";
+import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { ShimmerButton } from "@/components/ui/decorative-effects";
@@ -43,8 +44,8 @@ export function HeroSection() {
       {/* Background Beams */}
       <BackgroundBeams />
 
-      {/* Meteors */}
-      <Meteors number={25} />
+      {/* Glowing Stars */}
+      <GlowingStarsBackground starCount={100} columns={20} />
 
       {/* Grid background */}
       <div className="pointer-events-none absolute inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />

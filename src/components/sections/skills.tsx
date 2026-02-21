@@ -4,7 +4,8 @@ import { skillCategories, techStack } from "@/data/portfolio-data";
 import { SectionReveal, StaggerContainer, StaggerItem } from "@/components/section-reveal";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { Meteors, Spotlight } from "@/components/ui/decorative-effects";
+import { Spotlight } from "@/components/ui/decorative-effects";
+import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { FaReact,
   FaNodeJs,
   FaHtml5,
@@ -82,9 +83,7 @@ export function SkillsSection() {
     >
       <Spotlight className="-left-40 top-20" fill="rgba(59, 130, 246, 0.1)" />
       <Spotlight className="right-0 top-40" fill="rgba(139, 92, 246, 0.08)" />
-      <div className="pointer-events-none absolute inset-0 z-[15] overflow-hidden">
-        <Meteors number={15} />
-      </div>
+      <GlowingStarsBackground starCount={80} columns={16} />
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
         <SectionReveal>

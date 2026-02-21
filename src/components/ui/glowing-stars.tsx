@@ -1,6 +1,71 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+export const GlowingStarsBackground = ({
+  className,
+  starCount = 80,
+  columns = 16,
+}: {
+  className?: string;
+  starCount?: number;
+  columns?: number;
+}) => {
+  const [glowingStars, setGlowingStars] = useState<number[]>([]);
+  const highlightedStars = useRef<number[]>([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      highlightedStars.current = Array.from({ length: 6 }, () =>
+        Math.floor(Math.random() * starCount)
+      );
+      setGlowingStars([...highlightedStars.current]);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [starCount]);
+
+  return (
+    <div
+      className={cn(
+        "pointer-events-none absolute inset-0 z-0 overflow-hidden",
+        className
+      )}
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gap: "2px",
+        padding: "8px",
+      }}
+    >
+      {[...Array(starCount)].map((_, idx) => {
+        const isGlowing = glowingStars.includes(idx);
+        const delay = idx * 0.02;
+        return (
+          <div
+            key={`bg-star-${idx}`}
+            className="relative flex items-center justify-center"
+          >
+            <div
+              className={cn(
+                "h-[1px] w-[1px] rounded-full transition-all duration-700",
+                isGlowing
+                  ? "scale-[3] bg-blue-400 shadow-lg shadow-blue-400"
+                  : "bg-neutral-400/30 dark:bg-neutral-600/40"
+              )}
+              style={{ transitionDelay: delay + "s" }}
+            />
+            {isGlowing && (
+              <div
+                className="absolute h-[3px] w-[3px] rounded-full bg-blue-400/60 blur-[2px]"
+                style={{ animation: "pulse 2s infinite", animationDelay: delay + "s" }}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export const GlowingStarsCard = ({
   className,
@@ -139,5 +204,3 @@ const Glow = ({ delay }: { delay: number }) => {
     />
   );
 };
-
-import { useRef } from "react";

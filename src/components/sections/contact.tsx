@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { contactInfo } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
-import { ShimmerButton, Meteors } from "@/components/ui/decorative-effects";
+import { ShimmerButton } from "@/components/ui/decorative-effects";
+import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { ParticlesBackground } from "@/components/ui/particles";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import {
@@ -177,7 +178,7 @@ export function ContactSection() {
           {/* Contact Form */}
           <SectionReveal direction="right" delay={0.3}>
             <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-white/[0.1] dark:bg-neutral-900 md:p-8">
-              <Meteors number={10} />
+              <GlowingStarsBackground starCount={60} columns={12} />
 
               {submitted ? (
                 <motion.div

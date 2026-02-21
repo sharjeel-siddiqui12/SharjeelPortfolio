@@ -4,7 +4,8 @@ import { services } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { HoverEffect } from "@/components/ui/hover-effect";
 import { DotBackground } from "@/components/ui/sparkles";
-import { Meteors, MovingBorder } from "@/components/ui/decorative-effects";
+import { MovingBorder } from "@/components/ui/decorative-effects";
+import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 export function ServicesSection() {
@@ -20,7 +21,7 @@ export function ServicesSection() {
       className="relative min-h-screen w-full overflow-hidden bg-neutral-50 px-4 py-20 dark:bg-neutral-950 md:px-8 md:py-32"
     >
       <DotBackground className="opacity-30 dark:opacity-20" />
-      <Meteors number={20} />
+      <GlowingStarsBackground starCount={90} columns={18} />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionReveal>
