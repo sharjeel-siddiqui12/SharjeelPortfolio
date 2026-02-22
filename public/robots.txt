@@ -1,7 +1,32 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for SJS Solutions
+# https://sharjeelsiddiqui.info
+
+# Allow all good bots by default
 User-agent: *
 Allow: /
+
+# Allow Next.js static assets (CSS, JS, images)
+Allow: /_next/static/
+Allow: /_next/image/
+
+# Block internal Next.js build files and data
+Disallow: /_next/data/
+
+# Block API routes (if you want them private)
 Disallow: /api/
 
+
+# Allow search engine image bots
+User-agent: Googlebot-Image
+Allow: /
+
+# Ensure Googlebot can crawl everything allowed
+User-agent: Googlebot
+Allow: /
+
+# Allow Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
 Sitemap: https://sharjeelsiddiqui.info/sitemap.xml
-Host: https://sharjeelsiddiqui.info
