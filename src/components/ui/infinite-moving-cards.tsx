@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -21,9 +21,27 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
     addAnimation();
+    
+    // Pause animation when not visible
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (scrollerRef.current) {
+          scrollerRef.current.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+    
+    return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,11 +83,11 @@ export const InfiniteMovingCards = ({
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
+        containerRef.current.style.setProperty("--animation-duration", "25s");
       } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
+        containerRef.current.style.setProperty("--animation-duration", "45s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        containerRef.current.style.setProperty("--animation-duration", "90s");
       }
     }
   };
@@ -81,6 +99,7 @@ export const InfiniteMovingCards = ({
         "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
+      style={{ contain: "layout style" }}
     >
       <ul
         ref={scrollerRef}

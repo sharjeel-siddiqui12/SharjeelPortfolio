@@ -44,15 +44,14 @@ export function HeroSection() {
       {/* Background Beams */}
       <BackgroundBeams />
 
-      {/* Glowing Stars */}
-      <GlowingStarsBackground starCount={100} columns={20} />
+      {/* Glowing Stars - reduced star count for performance */}
+      <GlowingStarsBackground starCount={60} columns={15} />
 
-      {/* Floating gradient orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="hero-blob animate-blob animation-delay-0 animate-glow-pulse absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-600/15" />
-        <div className="hero-blob animate-blob animation-delay-2000 animate-glow-pulse absolute -right-32 top-1/4 h-80 w-80 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" />
-        <div className="hero-blob animate-blob animation-delay-4000 animate-glow-pulse absolute bottom-20 left-1/3 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl dark:bg-cyan-600/10" />
-        <div className="hero-blob animate-blob animation-delay-6000 animate-glow-pulse absolute right-10 top-10 h-56 w-56 rounded-full bg-indigo-500/10 blur-2xl dark:bg-indigo-600/8" />
+      {/* Floating gradient orbs - GPU accelerated with contain */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ contain: "layout style" }}>
+        <div className="hero-blob animate-blob animation-delay-0 animate-glow-pulse absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-600/15" style={{ transform: "translateZ(0)", contain: "layout style" }} />
+        <div className="hero-blob animate-blob animation-delay-2000 animate-glow-pulse absolute -right-32 top-1/4 h-80 w-80 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" style={{ transform: "translateZ(0)", contain: "layout style" }} />
+        <div className="hero-blob animate-blob animation-delay-4000 animate-glow-pulse absolute bottom-20 left-1/3 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl dark:bg-cyan-600/10" style={{ transform: "translateZ(0)", contain: "layout style" }} />
       </div>
 
       {/* Grid background */}
@@ -130,7 +129,7 @@ export function HeroSection() {
             </ShimmerButton>
           </Link>
           <Link href="#contact">
-            <button className="rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.15] dark:bg-transparent dark:text-neutral-300 dark:hover:border-blue-400 dark:hover:text-blue-400">
+            <button className="cursor-pointer rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.15] dark:bg-transparent dark:text-neutral-300 dark:hover:border-blue-400 dark:hover:text-blue-400">
               Contact Me
             </button>
           </Link>
@@ -139,7 +138,7 @@ export function HeroSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.15] dark:bg-transparent dark:text-neutral-300 dark:hover:border-blue-400 dark:hover:text-blue-400">
+            <button className="cursor-pointer rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.15] dark:bg-transparent dark:text-neutral-300 dark:hover:border-blue-400 dark:hover:text-blue-400">
               Download CV
             </button>
           </a>

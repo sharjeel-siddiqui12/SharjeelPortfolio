@@ -205,6 +205,19 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: "Personal Finance Tracker",
+    description:
+      "A comprehensive full-stack personal finance management application built with React, Node.js, Express, and Oracle Database. This application helps users track their income, expenses, budgets, savings goals, and generate detailed financial reports.",
+    longDescription:
+      "A comprehensive full-stack personal finance management application built with React, Node.js, Express, and Oracle Database. This application helps users track their income, expenses, budgets, savings goals, and generate detailed financial reports.",
+    technologies: ["React.js", "Node.js", "Express.js", "Oracle Database"],
+    image: "/projects/personal-finance-app.png",
+    // liveUrl: "",
+    githubUrl: "https://github.com/sharjeel-siddiqui12/personal-finance-app",
+    featured: false,
+  },
+  {
+    id: 3,
     title: "Coming Soon",
     description: "Exciting new web project in development using the MERN stack. Stay tuned for updates!",
     technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],

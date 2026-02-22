@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 
 export const GlowingStarsBackground = ({
   className,
@@ -12,20 +12,50 @@ export const GlowingStarsBackground = ({
   columns?: number;
 }) => {
   const [glowingStars, setGlowingStars] = useState<number[]>([]);
-  const highlightedStars = useRef<number[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisibleRef = useRef(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const updateGlowingStars = useCallback(() => {
+    if (!isVisibleRef.current) return;
+    const newStars = Array.from({ length: 6 }, () =>
+      Math.floor(Math.random() * starCount)
+    );
+    setGlowingStars(newStars);
+  }, [starCount]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      highlightedStars.current = Array.from({ length: 6 }, () =>
-        Math.floor(Math.random() * starCount)
-      );
-      setGlowingStars([...highlightedStars.current]);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [starCount]);
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Only animate when visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting && !intervalRef.current) {
+          updateGlowingStars();
+          intervalRef.current = setInterval(updateGlowingStars, 3000); // Slower interval
+        } else if (!entry.isIntersecting && intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      observer.disconnect();
+    };
+  }, [updateGlowingStars]);
+
+  // Memoize the star indices set for O(1) lookup
+  const glowingSet = useMemo(() => new Set(glowingStars), [glowingStars]);
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         "pointer-events-none absolute inset-0 z-0 overflow-hidden",
         className
@@ -35,11 +65,11 @@ export const GlowingStarsBackground = ({
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
         gap: "2px",
         padding: "8px",
+        contain: "layout style paint",
       }}
     >
       {[...Array(starCount)].map((_, idx) => {
-        const isGlowing = glowingStars.includes(idx);
-        const delay = idx * 0.02;
+        const isGlowing = glowingSet.has(idx);
         return (
           <div
             key={`bg-star-${idx}`}
@@ -47,17 +77,16 @@ export const GlowingStarsBackground = ({
           >
             <div
               className={cn(
-                "h-[1px] w-[1px] rounded-full transition-all duration-700",
+                "h-[1px] w-[1px] rounded-full transition-all duration-500",
                 isGlowing
                   ? "scale-[3] bg-blue-400 shadow-lg shadow-blue-400"
                   : "bg-neutral-400/30 dark:bg-neutral-600/40"
               )}
-              style={{ transitionDelay: delay + "s" }}
+              style={{ willChange: isGlowing ? "transform" : "auto" }}
             />
             {isGlowing && (
               <div
-                className="absolute h-[3px] w-[3px] rounded-full bg-blue-400/60 blur-[2px]"
-                style={{ animation: "pulse 2s infinite", animationDelay: delay + "s" }}
+                className="absolute h-[3px] w-[3px] rounded-full bg-blue-400/60 blur-[2px] animate-pulse"
               />
             )}
           </div>
@@ -135,19 +164,23 @@ const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
   const stars = 108;
   const columns = 18;
   const [glowingStars, setGlowingStars] = useState<number[]>([]);
-
-  const highlightedStars = useRef<number[]>([]);
+  const isActiveRef = useRef(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      highlightedStars.current = Array.from({ length: 5 }, () =>
-        Math.floor(Math.random() * stars)
+    isActiveRef.current = mouseEnter;
+    if (!mouseEnter) return;
+    
+    const updateStars = () => {
+      if (!isActiveRef.current) return;
+      setGlowingStars(
+        Array.from({ length: 5 }, () => Math.floor(Math.random() * stars))
       );
-      setGlowingStars([...highlightedStars.current]);
-    }, 3000);
-
+    };
+    
+    updateStars();
+    const interval = setInterval(updateStars, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [mouseEnter]);
 
   return (
     <div

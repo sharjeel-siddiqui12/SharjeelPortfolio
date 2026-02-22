@@ -23,6 +23,8 @@ function makeOrb(
     filter: blur(${blur});
     pointer-events: none;
     will-change: transform;
+    transform: translateZ(0);
+    contain: layout style;
   `;
   return el;
 }
@@ -32,9 +34,16 @@ function makeContainer(): HTMLDivElement {
   el.className = "gsap-parallax-layer";
   el.setAttribute("aria-hidden", "true");
   el.style.cssText =
-    "position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;";
+    "position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:layout style;";
   return el;
 }
+
+// Batch ScrollTrigger refresh for better performance
+let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+const debouncedRefresh = () => {
+  if (refreshTimer) clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100);
+};
 
 export function GSAPScrollAnimations() {
   /**
@@ -44,6 +53,19 @@ export function GSAPScrollAnimations() {
   const injectedEls = useRef<HTMLElement[]>([]);
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    
+    // Use reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Use requestIdleCallback for non-critical animations
+    const scheduleInit = (callback: () => void) => {
+      if ('requestIdleCallback' in window) {
+        (window as typeof window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(callback, { timeout: 500 });
+      } else {
+        setTimeout(callback, 100);
+      }
+    };
 
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
@@ -62,24 +84,36 @@ export function GSAPScrollAnimations() {
             { id: "#contact",      colors: ["rgba(59,130,246,0.13)", "rgba(6,182,212,0.10)",  "rgba(139,92,246,0.08)"] },
           ];
 
-        sectionDefs.forEach(({ id, colors }) => {
-          const section = document.querySelector<HTMLElement>(id);
-          if (!section) return;
-          if (getComputedStyle(section).position === "static") section.style.position = "relative";
+        // Initialize orbs with lazy loading
+        scheduleInit(() => {
+          sectionDefs.forEach(({ id, colors }) => {
+            const section = document.querySelector<HTMLElement>(id);
+            if (!section) return;
+            if (getComputedStyle(section).position === "static") section.style.position = "relative";
 
-          const container = makeContainer();
-          const orbDeep    = makeOrb(colors[0], "520px", { top: "-80px",  left: "-80px"  }, "50px");
-          const orbMid     = makeOrb(colors[1], "360px", { top: "30%",    right: "-60px" }, "38px");
-          const orbShallow = makeOrb(colors[2], "220px", { bottom: "40px",left: "38%"   }, "28px");
-          container.appendChild(orbDeep);
-          container.appendChild(orbMid);
-          container.appendChild(orbShallow);
-          section.insertBefore(container, section.firstChild);
-          injectedEls.current.push(container);
+            const container = makeContainer();
+            const orbDeep    = makeOrb(colors[0], "520px", { top: "-80px",  left: "-80px"  }, "50px");
+            const orbMid     = makeOrb(colors[1], "360px", { top: "30%",    right: "-60px" }, "38px");
+            const orbShallow = makeOrb(colors[2], "220px", { bottom: "40px",left: "38%"   }, "28px");
+            container.appendChild(orbDeep);
+            container.appendChild(orbMid);
+            container.appendChild(orbShallow);
+            section.insertBefore(container, section.firstChild);
+            injectedEls.current.push(container);
 
-          gsap.to(orbDeep,    { y: -140,              ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 3.5 } });
-          gsap.to(orbMid,     { y: -220, x: 40,       ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 2.2 } });
-          gsap.to(orbShallow, { y: -90,  x: -25,      ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 1.5 } });
+            // Use single ScrollTrigger per section for all orbs
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              onUpdate: (self) => {
+                const progress = self.progress;
+                gsap.set(orbDeep, { y: -140 * progress });
+                gsap.set(orbMid, { y: -220 * progress, x: 40 * progress });
+                gsap.set(orbShallow, { y: -90 * progress, x: -25 * progress });
+              },
+            });
+          });
         });
 
         // ════════════════════════════════════════════════════════════════
@@ -91,43 +125,53 @@ export function GSAPScrollAnimations() {
           { id: "#services", text: "DESIGN • DEVELOP • TEST • LAUNCH • MAINTAIN • GROWTH",       dir: -1, top: true  },
         ];
 
-        marqueeConfigs.forEach(({ id, text, dir, top }) => {
-          const section = document.querySelector<HTMLElement>(id);
-          if (!section) return;
+        scheduleInit(() => {
+          marqueeConfigs.forEach(({ id, text, dir, top }) => {
+            const section = document.querySelector<HTMLElement>(id);
+            if (!section) return;
 
-          const wrapper = document.createElement("div");
-          wrapper.setAttribute("aria-hidden", "true");
-          wrapper.style.cssText = `
-            position: absolute;
-            ${top ? "top: 12px" : "bottom: 12px"};
-            left: 0; right: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.045;
-          `;
-          const strip = document.createElement("div");
-          strip.style.cssText = `
-            white-space: nowrap;
-            font-size: 6rem;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            line-height: 1;
-            display: inline-block;
-            color: currentColor;
-            will-change: transform;
-          `;
-          strip.textContent = `${text}    ${text}    ${text}`;
-          wrapper.appendChild(strip);
-          section.insertBefore(wrapper, section.firstChild);
-          injectedEls.current.push(wrapper);
+            const wrapper = document.createElement("div");
+            wrapper.setAttribute("aria-hidden", "true");
+            wrapper.style.cssText = `
+              position: absolute;
+              ${top ? "top: 12px" : "bottom: 12px"};
+              left: 0; right: 0;
+              overflow: hidden;
+              pointer-events: none;
+              z-index: 0;
+              opacity: 0.045;
+              contain: layout style;
+            `;
+            const strip = document.createElement("div");
+            strip.style.cssText = `
+              white-space: nowrap;
+              font-size: 6rem;
+              font-weight: 900;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              line-height: 1;
+              display: inline-block;
+              color: currentColor;
+              will-change: transform;
+              transform: translateZ(0);
+            `;
+            strip.textContent = `${text}    ${text}    ${text}`;
+            wrapper.appendChild(strip);
+            section.insertBefore(wrapper, section.firstChild);
+            injectedEls.current.push(wrapper);
 
-          gsap.set(strip, { x: dir === -1 ? "0%" : "-25%" });
-          gsap.to(strip, {
-            x: dir === -1 ? "-25%" : "0%",
-            ease: "none",
-            scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 2.5 },
+            const startX = dir === -1 ? 0 : -25;
+            const endX = dir === -1 ? -25 : 0;
+            gsap.set(strip, { xPercent: startX });
+            
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              onUpdate: (self) => {
+                gsap.set(strip, { xPercent: startX + (endX - startX) * self.progress });
+              },
+            });
           });
         });
 
@@ -140,45 +184,65 @@ export function GSAPScrollAnimations() {
           { id: "#services", num: "05" }, { id: "#certificates", num: "06" },
           { id: "#contact", num: "07" },
         ];
-        sectionNums.forEach(({ id, num }) => {
-          const section = document.querySelector<HTMLElement>(id);
-          if (!section) return;
-          const numEl = document.createElement("div");
-          numEl.setAttribute("aria-hidden", "true");
-          numEl.textContent = num;
-          numEl.style.cssText = `
-            position: absolute; right: -20px; top: 40px;
-            font-size: clamp(8rem, 18vw, 16rem);
-            font-weight: 900; letter-spacing: -0.04em; line-height: 1;
-            color: currentColor; opacity: 0.028;
-            pointer-events: none; user-select: none; z-index: 0;
-            will-change: transform;
-          `;
-          section.insertBefore(numEl, section.firstChild);
-          injectedEls.current.push(numEl);
-          gsap.to(numEl, { y: -90, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 2.8 } });
+        
+        scheduleInit(() => {
+          sectionNums.forEach(({ id, num }) => {
+            const section = document.querySelector<HTMLElement>(id);
+            if (!section) return;
+            const numEl = document.createElement("div");
+            numEl.setAttribute("aria-hidden", "true");
+            numEl.textContent = num;
+            numEl.style.cssText = `
+              position: absolute; right: -20px; top: 40px;
+              position: absolute; right: -20px; top: 40px;
+              font-size: clamp(8rem, 18vw, 16rem);
+              font-weight: 900; letter-spacing: -0.04em; line-height: 1;
+              color: currentColor; opacity: 0.028;
+              pointer-events: none; user-select: none; z-index: 0;
+              will-change: transform;
+              transform: translateZ(0);
+              contain: layout style;
+            `;
+            section.insertBefore(numEl, section.firstChild);
+            injectedEls.current.push(numEl);
+            
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              onUpdate: (self) => {
+                gsap.set(numEl, { y: -90 * self.progress });
+              },
+            });
+          });
         });
 
         // ════════════════════════════════════════════════════════════════
-        //  D. AMBIENT FIXED GLOW — color shifts as user scrolls
+        //  D. AMBIENT FIXED GLOW — color shifts as user scrolls (throttled)
         // ════════════════════════════════════════════════════════════════
         const ambientGlow = document.createElement("div");
         ambientGlow.setAttribute("aria-hidden", "true");
         ambientGlow.classList.add("gsap-ambient-glow");
         ambientGlow.style.cssText = `
           position: fixed; top: 50%; left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) translateZ(0);
           width: 900px; height: 900px; border-radius: 50%;
-          pointer-events: none; z-index: 0; will-change: background;
+          pointer-events: none; z-index: 0;
           background: radial-gradient(circle, rgba(59,130,246,0.035), transparent 70%);
+          contain: layout style;
         `;
         document.body.appendChild(ambientGlow);
         injectedEls.current.push(ambientGlow);
 
+        // Throttle color updates to reduce paint calls
+        let lastColorUpdate = 0;
         ScrollTrigger.create({
           trigger: document.documentElement,
           start: "top top", end: "bottom bottom",
           onUpdate: (self) => {
+            const now = Date.now();
+            if (now - lastColorUpdate < 50) return; // Throttle to ~20fps
+            lastColorUpdate = now;
             const p = self.progress;
             const r = Math.round(59  + p * 100);
             const g = Math.round(130 - p * 55);
@@ -188,36 +252,47 @@ export function GSAPScrollAnimations() {
         });
 
         // ════════════════════════════════════════════════════════════════
-        //  E. HERO — multi-depth blob parallax + content exit
+        //  E. HERO — multi-depth blob parallax + content exit (optimized)
         // ════════════════════════════════════════════════════════════════
-        gsap.utils.toArray<HTMLElement>(".hero-blob").forEach((blob, i) => {
-          gsap.to(blob, {
-            y: i % 2 === 0 ? -200 : 155,
-            x: i % 3 === 0 ? -75 : 55,
-            scale: i % 2 === 0 ? 1.18 : 0.86,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#home",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.8 + i * 0.35,
+        const heroBlobs = gsap.utils.toArray<HTMLElement>(".hero-blob");
+        if (heroBlobs.length > 0) {
+          // Use single ScrollTrigger for all hero blobs instead of one per blob
+          ScrollTrigger.create({
+            trigger: "#home",
+            start: "top top",
+            end: "bottom top",
+            onUpdate: (self) => {
+              const progress = self.progress;
+              heroBlobs.forEach((blob, i) => {
+                const yTarget = i % 2 === 0 ? -200 : 155;
+                const xTarget = i % 3 === 0 ? -75 : 55;
+                const scaleTarget = i % 2 === 0 ? 1.18 : 0.86;
+                gsap.set(blob, {
+                  y: yTarget * progress,
+                  x: xTarget * progress,
+                  scale: 1 + (scaleTarget - 1) * progress,
+                });
+              });
             },
           });
-        });
+        }
 
         // Hero content fades, lifts, and scales away as user scrolls
-        gsap.to(".hero-content", {
-          y: -130,
-          scale: 0.94,
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
+        const heroContent = document.querySelector(".hero-content");
+        if (heroContent) {
+          ScrollTrigger.create({
             trigger: "#home",
             start: "top top",
             end: "65% top",
-            scrub: 1.5,
-          },
-        });
+            onUpdate: (self) => {
+              gsap.set(heroContent, {
+                y: -130 * self.progress,
+                scale: 1 - 0.06 * self.progress,
+                opacity: 1 - self.progress,
+              });
+            },
+          });
+        }
 
         // ════════════════════════════════════════════════════════════════
         //  F. SECTION HEADINGS & SUBHEADINGS
@@ -375,17 +450,23 @@ export function GSAPScrollAnimations() {
         });
 
         // ════════════════════════════════════════════════════════════════
-        //  P. TECH CHIP WAVE STAGGER
+        //  P. TECH CHIP WAVE STAGGER (optimized - single trigger)
         // ════════════════════════════════════════════════════════════════
-        gsap.utils.toArray<HTMLElement>(".gsap-tech-chip").forEach((chip, i) => {
-          gsap.fromTo(chip,
+        const techChips = gsap.utils.toArray<HTMLElement>(".gsap-tech-chip");
+        if (techChips.length > 0) {
+          gsap.fromTo(techChips,
             { opacity: 0, scale: 0.68, y: 22 },
-            { opacity: 1, scale: 1, y: 0, delay: (i % 8) * 0.06, duration: 0.58, ease: "back.out(1.6)",
-              scrollTrigger: { trigger: chip, start: "top 92%", toggleActions: "play none none none" } }
+            { 
+              opacity: 1, scale: 1, y: 0, 
+              stagger: { amount: 0.5, from: "start" },
+              duration: 0.58, 
+              ease: "back.out(1.6)",
+              scrollTrigger: { trigger: techChips[0], start: "top 92%", toggleActions: "play none none none" }
+            }
           );
-        });
+        }
 
-        ScrollTrigger.refresh();
+        debouncedRefresh();
       });
 
       return () => {
