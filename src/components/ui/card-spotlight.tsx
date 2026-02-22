@@ -1,7 +1,7 @@
 "use client";
 
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
-import React, { MouseEvent as ReactMouseEvent, ReactNode } from "react";
+import React, { MouseEvent as ReactMouseEvent, ReactNode, useRef, useCallback } from "react";
 
 export const CardSpotlight = ({
   children,
@@ -12,18 +12,24 @@ export const CardSpotlight = ({
 }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const lastUpdate = useRef(0);
 
-  function handleMouseMove({
+  const handleMouseMove = useCallback(({
     currentTarget,
     clientX,
     clientY,
-  }: ReactMouseEvent<HTMLDivElement>) {
+  }: ReactMouseEvent<HTMLDivElement>) => {
+    // Throttle to ~30fps
+    const now = performance.now();
+    if (now - lastUpdate.current < 33) return;
+    lastUpdate.current = now;
+    
     if (!currentTarget) return;
     const { left, top } = currentTarget.getBoundingClientRect();
 
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
-  }
+  }, [mouseX, mouseY]);
 
   return (
     <div
@@ -58,18 +64,24 @@ export const CardSpotlightBorder = ({
 }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const lastUpdate = useRef(0);
 
-  function handleMouseMove({
+  const handleMouseMove = useCallback(({
     currentTarget,
     clientX,
     clientY,
-  }: ReactMouseEvent<HTMLDivElement>) {
+  }: ReactMouseEvent<HTMLDivElement>) => {
+    // Throttle to ~30fps
+    const now = performance.now();
+    if (now - lastUpdate.current < 33) return;
+    lastUpdate.current = now;
+    
     if (!currentTarget) return;
     const { left, top } = currentTarget.getBoundingClientRect();
 
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
-  }
+  }, [mouseX, mouseY]);
 
   return (
     <div

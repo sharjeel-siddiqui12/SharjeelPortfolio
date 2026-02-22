@@ -8,6 +8,8 @@ import { Spotlight } from "@/components/ui/decorative-effects";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { FaExternalLinkAlt, FaGithub, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
+
 
 export function ProjectsSection() {
   const displayProjects = projects.slice(0, 3);
@@ -39,58 +41,90 @@ export function ProjectsSection() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {displayProjects.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              className="gsap-project-card"
-            >
+            <motion.div key={project.id} className="gsap-project-card">
               <CardContainer containerClassName="py-0">
                 <CardBody className="card-glow group relative w-full rounded-2xl border border-neutral-200 bg-white/80 p-6 backdrop-blur-sm transition-all dark:border-white/[0.1] dark:bg-neutral-950/80">
-                  {/* Project Image Placeholder */}
+                  {/* Project Image Section */}
                   <CardItem translateZ={50} className="w-full">
                     <div className="relative h-48 w-full overflow-hidden rounded-xl">
-                      {/* Animated gradient background */}
-                      <motion.div
-                        className="absolute inset-0 animate-gradient-shift"
-                        style={{
-                          background: [
-                            "linear-gradient(135deg, rgba(59,130,246,0.4) 0%, rgba(6,182,212,0.4) 50%, rgba(139,92,246,0.4) 100%)",
-                            "linear-gradient(135deg, rgba(139,92,246,0.4) 0%, rgba(59,130,246,0.4) 50%, rgba(6,182,212,0.4) 100%)",
-                          ][idx % 2],
-                        }}
-                        animate={{
-                          background: [
-                            "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(6,182,212,0.35) 50%, rgba(139,92,246,0.35) 100%)",
-                            "linear-gradient(135deg, rgba(139,92,246,0.45) 0%, rgba(59,130,246,0.35) 50%, rgba(6,182,212,0.45) 100%)",
-                            "linear-gradient(135deg, rgba(6,182,212,0.45) 0%, rgba(139,92,246,0.35) 50%, rgba(59,130,246,0.45) 100%)",
-                            "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(6,182,212,0.35) 50%, rgba(139,92,246,0.35) 100%)",
-                          ],
-                        }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                      {/* Animated grid lines */}
-                      <div
-                        className="absolute inset-0 opacity-20"
-                        style={{
-                          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
-                          backgroundSize: "30px 30px",
-                        }}
-                      />
-                      {/* Glowing orb */}
-                      <motion.div
-                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-16 w-16 rounded-full bg-white/20 blur-xl"
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0.7, 0.4] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      />
-                      {/* Project initials with glow */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.span
-                          animate={{ textShadow: ["0 0 20px rgba(255,255,255,0.5)", "0 0 40px rgba(255,255,255,0.9)", "0 0 20px rgba(255,255,255,0.5)"] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-3xl font-black text-white/80 drop-shadow-lg"
-                        >
-                          {project.title.split(" ").map((w) => w[0]).join("")}
-                        </motion.span>
-                      </div>
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <>
+                          {/* Animated gradient background */}
+                          <motion.div
+                            className="absolute inset-0"
+                            style={{
+                              background:
+                                idx % 2 === 0
+                                  ? "linear-gradient(135deg, rgba(59,130,246,0.4) 0%, rgba(6,182,212,0.4) 50%, rgba(139,92,246,0.4) 100%)"
+                                  : "linear-gradient(135deg, rgba(139,92,246,0.4) 0%, rgba(59,130,246,0.4) 50%, rgba(6,182,212,0.4) 100%)",
+                            }}
+                            animate={{
+                              background: [
+                                "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(6,182,212,0.35) 50%, rgba(139,92,246,0.35) 100%)",
+                                "linear-gradient(135deg, rgba(139,92,246,0.45) 0%, rgba(59,130,246,0.35) 50%, rgba(6,182,212,0.45) 100%)",
+                                "linear-gradient(135deg, rgba(6,182,212,0.45) 0%, rgba(139,92,246,0.35) 50%, rgba(59,130,246,0.45) 100%)",
+                                "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(6,182,212,0.35) 50%, rgba(139,92,246,0.35) 100%)",
+                              ],
+                            }}
+                            transition={{
+                              duration: 6,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+
+                          {/* Grid overlay */}
+                          <div
+                            className="absolute inset-0 opacity-20"
+                            style={{
+                              backgroundImage:
+                                "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
+                              backgroundSize: "30px 30px",
+                            }}
+                          />
+
+                          {/* Glowing orb */}
+                          <motion.div
+                            className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-xl"
+                            animate={{
+                              scale: [1, 1.5, 1],
+                              opacity: [0.4, 0.7, 0.4],
+                            }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          />
+
+                          {/* Project initials */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <motion.span
+                              animate={{
+                                textShadow: [
+                                  "0 0 20px rgba(255,255,255,0.5)",
+                                  "0 0 40px rgba(255,255,255,0.9)",
+                                  "0 0 20px rgba(255,255,255,0.5)",
+                                ],
+                              }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                              className="text-3xl font-black text-white/80 drop-shadow-lg"
+                            >
+                              {project.title
+                                .split(" ")
+                                .map((w) => w[0])
+                                .join("")}
+                            </motion.span>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Hover gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
                   </CardItem>
@@ -151,6 +185,7 @@ export function ProjectsSection() {
                         <FaGithub className="h-4 w-4" />
                         Code
                       </a>
+
                       <a
                         href={project.liveUrl || undefined}
                         target="_blank"

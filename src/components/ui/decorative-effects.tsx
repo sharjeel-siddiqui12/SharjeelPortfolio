@@ -112,6 +112,9 @@ export const MovingBorder = ({
   as?: React.ElementType;
   [key: string]: unknown;
 }) => {
+  // Use CSS animation instead of Framer Motion for better performance
+  const animationDuration = `${duration / 1000}s`;
+  
   return (
     <Component
       className={cn(
@@ -125,19 +128,13 @@ export const MovingBorder = ({
         className="absolute inset-0"
         style={{ borderRadius: "calc(1.75rem * 0.96)" }}
       >
-        <motion.div
+        <div
+          className={cn("absolute inset-[-1000%] opacity-30 animate-spin-slow", borderClassName)}
           style={{
-            backgroundImage: `linear-gradient(var(--r), #3b82f6, #8b5cf6, #06b6d4)`,
+            backgroundImage: `linear-gradient(0deg, #3b82f6, #8b5cf6, #06b6d4)`,
+            animationDuration,
+            willChange: "transform",
           }}
-          animate={{
-            "--r": ["0deg", "360deg"],
-          }}
-          transition={{
-            duration: duration / 1000,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className={cn("absolute inset-[-1000%] opacity-30", borderClassName)}
         />
       </div>
       <div

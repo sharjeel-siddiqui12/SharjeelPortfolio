@@ -1,10 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -13,20 +11,35 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { navItems } from "@/data/portfolio-data";
 
 export function Navbar() {
-  const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      const direction = current - (scrollYProgress.getPrevious() ?? 0);
-      if (scrollYProgress.get() < 0.05) {
-        setVisible(true);
-      } else {
-        setVisible(direction < 0);
-      }
-    }
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ticking.current) return;
+      
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollProgress = currentScrollY / scrollHeight;
+        
+        if (scrollProgress < 0.05) {
+          setVisible(true);
+        } else {
+          setVisible(currentScrollY < lastScrollY.current);
+        }
+        
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -69,23 +82,29 @@ export function Navbar() {
           {/* Theme Toggle */}
           <ThemeToggle />
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - CSS transitions instead of Framer Motion */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex h-8 w-8 flex-col items-center justify-center gap-1 md:hidden"
             aria-label="Toggle menu"
           >
-            <motion.span
-              animate={mobileMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-              className="block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300"
+            <span
+              className={cn(
+                "block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300 transition-transform duration-200",
+                mobileMenuOpen && "translate-y-[5px] rotate-45"
+              )}
             />
-            <motion.span
-              animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300"
+            <span
+              className={cn(
+                "block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300 transition-opacity duration-200",
+                mobileMenuOpen && "opacity-0"
+              )}
             />
-            <motion.span
-              animate={mobileMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-              className="block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300"
+            <span
+              className={cn(
+                "block h-0.5 w-5 bg-neutral-700 dark:bg-neutral-300 transition-transform duration-200",
+                mobileMenuOpen && "-translate-y-[5px] -rotate-45"
+              )}
             />
           </button>
         </motion.nav>

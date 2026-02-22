@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export const HoverEffect = ({
   items,
@@ -32,23 +31,13 @@ export const HoverEffect = ({
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <AnimatePresence>
-              {hoveredIndex === idx && (
-                <motion.span
-                  className="absolute inset-0 block h-full w-full rounded-3xl bg-neutral-200/[0.8] dark:bg-slate-800/[0.8]"
-                  layoutId="hoverBackground"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.15 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    transition: { duration: 0.15, delay: 0.2 },
-                  }}
-                />
+            {/* CSS transition instead of AnimatePresence + layoutId */}
+            <span
+              className={cn(
+                "absolute inset-0 block h-full w-full rounded-3xl bg-neutral-200/[0.8] dark:bg-slate-800/[0.8] transition-opacity duration-150",
+                hoveredIndex === idx ? "opacity-100" : "opacity-0"
               )}
-            </AnimatePresence>
+            />
             <Card>
               <div className="flex items-center gap-3">
                 {item.icon && <span className="text-2xl">{item.icon}</span>}

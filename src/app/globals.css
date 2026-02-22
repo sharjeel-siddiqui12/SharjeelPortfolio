@@ -415,3 +415,21 @@ section {
 [class^="parallax-orb-"] {
   will-change: transform;
 }
+
+/* Sparkle animation for optimized sparkles */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) translateZ(0); }
+  50% { opacity: 1; transform: scale(1) translateZ(0); }
+}
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+/* Cursor blink animation */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-cursor-blink {
+  animation: cursor-blink 1s ease-in-out infinite;
+}

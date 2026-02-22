@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useRef, useState } from "react";
 
 // --- CardContainer (context-based 3D card from src3) ---
 const MouseEnterContext = createContext<
@@ -79,30 +79,33 @@ export const ThreeDCard = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const rotateXValue = useMotionValue(0);
+  const rotateYValue = useMotionValue(0);
+  const rotateX = useSpring(rotateXValue, { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(rotateYValue, { stiffness: 150, damping: 20 });
+  const lastUpdateRef = useRef(0);
 
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 150, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 150, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // Throttle to ~30fps
+    const now = performance.now();
+    if (now - lastUpdateRef.current < 33) return;
+    lastUpdateRef.current = now;
+    
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const rX = ((y / height) - 0.5) * -20;
-    const rY = ((x / width) - 0.5) * 20;
-    rotateX.set(rX);
-    rotateY.set(rY);
-    mouseX.set(x);
-    mouseY.set(y);
-  };
+    const rX = ((y / height) - 0.5) * -15;
+    const rY = ((x / width) - 0.5) * 15;
+    rotateXValue.set(rX);
+    rotateYValue.set(rY);
+  }, [rotateXValue, rotateYValue]);
 
-  const handleMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-  };
+  const handleMouseLeave = useCallback(() => {
+    rotateXValue.set(0);
+    rotateYValue.set(0);
+  }, [rotateXValue, rotateYValue]);
 
   return (
     <div

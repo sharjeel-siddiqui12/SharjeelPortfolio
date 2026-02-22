@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 
 export const Sparkles = ({
   children,
@@ -18,29 +17,43 @@ export const Sparkles = ({
   );
 };
 
+// Optimized: Use CSS animations instead of Framer Motion, reduced from 12 to 6 sparkles
 const SparklesCore = () => {
-  const randomMove = () => Math.random() * 2 - 1;
-  const randomOpacity = () => Math.random();
-  const randomDelay = () => Math.random() * 2;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // Pre-generate static positions
+  const sparkles = [
+    { top: "10%", left: "15%", delay: "0s" },
+    { top: "30%", left: "80%", delay: "0.5s" },
+    { top: "60%", left: "25%", delay: "1s" },
+    { top: "20%", left: "60%", delay: "1.5s" },
+    { top: "70%", left: "70%", delay: "2s" },
+    { top: "50%", left: "40%", delay: "2.5s" },
+  ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {[...Array(12)].map((_, i) => (
-        <motion.span
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden" style={{ contain: "layout style" }}>
+      {isVisible && sparkles.map((s, i) => (
+        <span
           key={i}
-          className="absolute inline-block h-1 w-1 rounded-full bg-blue-400"
-          animate={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            opacity: [0, randomOpacity(), 0],
-            scale: [0, 1, 0],
-            x: [0, randomMove() * 20],
-            y: [0, randomMove() * 20],
-          }}
-          transition={{
-            duration: 2 + Math.random() * 2,
-            repeat: Infinity,
-            delay: randomDelay(),
+          className="absolute inline-block h-1 w-1 rounded-full bg-blue-400 animate-sparkle"
+          style={{
+            top: s.top,
+            left: s.left,
+            animationDelay: s.delay,
           }}
         />
       ))}

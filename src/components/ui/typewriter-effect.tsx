@@ -106,6 +106,7 @@ export const TypewriterEffectSmooth = ({
         className="overflow-hidden pb-1"
         initial={{ width: "0%" }}
         whileInView={{ width: "fit-content" }}
+        viewport={{ once: true }}
         transition={{ duration: 2, ease: "linear", delay: 0.5 }}
       >
         <div className="whitespace-nowrap text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
@@ -127,18 +128,10 @@ export const TypewriterEffectSmooth = ({
           ))}
         </div>
       </motion.div>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 1, 0] }}
-        transition={{
-          duration: 1,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut",
-          times: [0, 0.1, 0.9, 1],
-        }}
+      {/* CSS animation cursor instead of Framer Motion */}
+      <span
         className={cn(
-          "inline-block h-6 w-[3px] rounded-[2px] bg-blue-500 sm:h-7 md:h-8 lg:h-9 xl:h-12",
+          "inline-block h-6 w-[3px] rounded-[2px] bg-blue-500 sm:h-7 md:h-8 lg:h-9 xl:h-12 animate-cursor-blink",
           cursorClassName
         )}
       />
