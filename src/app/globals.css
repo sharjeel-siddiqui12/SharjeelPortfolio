@@ -332,3 +332,78 @@ body {
 .animate-available-pulse {
   animation: available-pulse 2s ease infinite;
 }
+
+/* ===================================================================
+   SMOOTH MAGNETIC CURSOR
+   Only activated on pointer-fine (non-touch) devices.
+   Uses mix-blend-mode: difference for a striking invert effect.
+   =================================================================== */
+@media (pointer: fine) {
+  /* Hide the native cursor everywhere */
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+.smooth-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  pointer-events: none;
+  z-index: 999999;
+  /* GSAP will set transform: translate() instead of top/left */
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  will-change: transform;
+  opacity: 0; /* revealed by JS after first mousemove */
+}
+
+.smooth-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  will-change: transform;
+  opacity: 0;
+  background: transparent;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+/* ===================================================================
+   GSAP PARALLAX LAYER SYSTEM
+   =================================================================== */
+
+/* Ensure all main sections can host absolute-positioned parallax layers */
+section {
+  overflow: hidden;
+}
+
+/* The injected ambient glow sits behind everything */
+.gsap-ambient-glow {
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===================================================================
+   PARALLAX MARQUEE STRIP
+   The oversized background text strips injected by GSAP
+   =================================================================== */
+.gsap-parallax-layer {
+  overflow: hidden;
+}
+
+/* Smooth will-change hint for all orbs */
+[class^="parallax-orb-"] {
+  will-change: transform;
+}
