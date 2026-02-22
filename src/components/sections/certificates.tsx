@@ -36,13 +36,9 @@ export function CertificatesSection() {
           {displayCerts.map((cert, idx) => (
             <motion.div
               key={cert.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
               whileHover={{ y: -5 }}
               onClick={() => setSelectedCert(cert)}
-              className="group cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm transition-all hover:shadow-xl hover:shadow-blue-500/5 dark:border-white/[0.1] dark:bg-neutral-950/80"
+              className="gsap-cert-item group cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm transition-all hover:shadow-xl hover:shadow-blue-500/5 dark:border-white/[0.1] dark:bg-neutral-950/80"
             >
               {/* Certificate Image */}
               <div className="relative h-70 overflow-hidden bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-purple-500/10">

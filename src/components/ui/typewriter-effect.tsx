@@ -101,14 +101,14 @@ export const TypewriterEffectSmooth = ({
   }));
 
   return (
-    <div className={cn("my-6 flex space-x-1", className)}>
+    <div className={cn("my-6 flex items-center space-x-1.5", className)}>
       <motion.div
-        className="overflow-hidden pb-2"
+        className="overflow-hidden pb-1"
         initial={{ width: "0%" }}
         whileInView={{ width: "fit-content" }}
         transition={{ duration: 2, ease: "linear", delay: 0.5 }}
       >
-        <div className="whitespace-nowrap text-xs font-bold sm:text-base md:text-xl lg:text-3xl xl:text-5xl">
+        <div className="whitespace-nowrap text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
           {wordsArray.map((word, idx) => (
             <div key={`word-${idx}`} className="inline-block">
               {word.text.map((char, index) => (
@@ -129,14 +129,16 @@ export const TypewriterEffectSmooth = ({
       </motion.div>
       <motion.span
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: [0, 1, 1, 0] }}
         transition={{
-          duration: 0.8,
+          duration: 1,
           repeat: Infinity,
-          repeatType: "reverse",
+          repeatType: "loop",
+          ease: "easeInOut",
+          times: [0, 0.1, 0.9, 1],
         }}
         className={cn(
-          "block h-4 w-[4px] rounded-sm bg-blue-500 sm:h-6 xl:h-12",
+          "inline-block h-6 w-[3px] rounded-[2px] bg-blue-500 sm:h-7 md:h-8 lg:h-9 xl:h-12",
           cursorClassName
         )}
       />

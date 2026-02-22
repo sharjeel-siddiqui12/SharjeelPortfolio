@@ -7,7 +7,7 @@ import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { ShimmerButton } from "@/components/ui/decorative-effects";
-import { FaGithub, FaLinkedin, FaWhatsapp, FaInstagram, FaArrowDown } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { SiGmail } from 'react-icons/si';
 import Link from "next/link";
 
@@ -29,7 +29,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-white px-4 dark:bg-black"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-white px-4 dark:bg-black mt-5"
     >
       {/* Spotlight */}
       <Spotlight
@@ -47,6 +47,14 @@ export function HeroSection() {
       {/* Glowing Stars */}
       <GlowingStarsBackground starCount={100} columns={20} />
 
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="hero-blob animate-blob animation-delay-0 animate-glow-pulse absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-600/15" />
+        <div className="hero-blob animate-blob animation-delay-2000 animate-glow-pulse absolute -right-32 top-1/4 h-80 w-80 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" />
+        <div className="hero-blob animate-blob animation-delay-4000 animate-glow-pulse absolute bottom-20 left-1/3 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl dark:bg-cyan-600/10" />
+        <div className="hero-blob animate-blob animation-delay-6000 animate-glow-pulse absolute right-10 top-10 h-56 w-56 rounded-full bg-indigo-500/10 blur-2xl dark:bg-indigo-600/8" />
+      </div>
+
       {/* Grid background */}
       <div className="pointer-events-none absolute inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
       <div
@@ -57,16 +65,20 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
-        {/* Greeting
+      <div className="hero-content relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
+        {/* Available for work badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="rounded-full border border-neutral-200 bg-white/50 px-4 py-1.5  text-sm text-neutral-600 backdrop-blur-sm dark:border-white/[0.1] dark:bg-black/50 dark:text-neutral-400"
+          initial={{ opacity: 0, y: 20, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, type: "spring" }}
+          className="flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-1.5 backdrop-blur-sm"
         >
-          👋 Welcome to my portfolio
-        </motion.div> */}
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="animate-available-pulse relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+          </span>
+          <span className="text-xs font-medium text-green-600 dark:text-green-400">Available for work</span>
+        </motion.div>
 
         {/* Name */}
         <motion.h1
@@ -76,7 +88,7 @@ export function HeroSection() {
           className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Hi, I&apos;m{" "}
-          <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+          <span className="gradient-text-shimmer">
             {personalInfo.name}
           </span>
         </motion.h1>
@@ -141,16 +153,21 @@ export function HeroSection() {
           className="mt-4 flex gap-3"
         >
           {contactInfo.socialLinks.slice(0, 4).map((link, idx) => (
-            <a
+            <motion.a
               key={idx}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-neutral-500 transition-all hover:scale-110 hover:border-blue-500 hover:text-blue-500 dark:border-white/[0.1] dark:text-neutral-400 dark:hover:border-blue-400 dark:hover:text-blue-400"
+              whileHover={{ scale: 1.15, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 + idx * 0.1, duration: 0.4 }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white/60 text-neutral-500 shadow-sm backdrop-blur-sm transition-all hover:border-blue-500 hover:bg-blue-500/10 hover:text-blue-500 hover:shadow-blue-500/25 dark:border-white/[0.1] dark:bg-white/5 dark:text-neutral-400 dark:hover:border-blue-400 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
               aria-label={link.name}
             >
               {socialIconMap[link.icon] || link.name[0]}
-            </a>
+            </motion.a>
           ))}
         </motion.div>
       </div>
@@ -170,7 +187,16 @@ export function HeroSection() {
           <span className="text-xs text-neutral-500 dark:text-neutral-500">
             Scroll Down
           </span>
-          <FaArrowDown className="h-3 w-3 text-neutral-400 dark:text-neutral-600" />
+          <div className="relative flex items-center justify-center">
+            <span className="animate-ping-slow absolute h-5 w-5 rounded-full bg-blue-400/30" />
+            <div className="relative flex h-8 w-5 items-start justify-center rounded-full border-2 border-blue-400/60 pt-1">
+              <motion.div
+                animate={{ y: [0, 10, 0], opacity: [1, 0, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="h-1.5 w-1 rounded-full bg-blue-500"
+              />
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </section>

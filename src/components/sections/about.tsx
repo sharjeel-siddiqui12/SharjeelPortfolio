@@ -83,11 +83,18 @@ export function AboutSection() {
     >
       <DotBackground className="opacity-40 dark:opacity-20" />
 
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob animate-glow-pulse absolute -right-20 top-10 h-80 w-80 rounded-full bg-blue-500/15 blur-3xl dark:bg-blue-600/10" />
+        <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute -left-20 bottom-20 h-72 w-72 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" />
+        <div className="animate-blob animation-delay-2000 animate-glow-pulse absolute left-1/2 top-1/3 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl dark:bg-cyan-600/8" />
+      </div>
+
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
         <SectionReveal>
           <h2 className="section-heading text-neutral-900 dark:text-white">
-            About <span className="gradient-text">Me</span>
+            About <span className="gradient-text-shimmer">Me</span>
           </h2>
           <p className="section-subheading">
             Get to know me better — my journey, interests, and education
@@ -95,10 +102,10 @@ export function AboutSection() {
         </SectionReveal>
 
         {/* About Content */}
-        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="grid gap-8 overflow-hidden md:grid-cols-2 md:items-center">
           {/* Profile Image & Info */}
           <SectionReveal direction="left" delay={0.2}>
-            <ThreeDCard className="mx-auto w-full max-w-md">
+            <ThreeDCard className="gsap-about-card mx-auto w-full max-w-md">
               <CardBody className="p-6">
                 {/* Profile Image */}
                 <div className="mb-6 flex justify-center">
@@ -116,15 +123,21 @@ export function AboutSection() {
 
                     {/* Gradient overlay at bottom */}
                     <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
-                    {/* Animated corner accents */}
+                    {/* Animated pulsing border rings */}
                     <motion.div
-                      className="absolute inset-0 rounded-2xl border-2 border-blue-500/50"
-                      animate={{ opacity: [0.3, 0.7, 0.3] }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        boxShadow: "0 0 0 2px rgba(59,130,246,0.5), 0 0 30px rgba(59,130,246,0.2)",
                       }}
+                      animate={{
+                        boxShadow: [
+                          "0 0 0 2px rgba(59,130,246,0.4), 0 0 20px rgba(59,130,246,0.15)",
+                          "0 0 0 3px rgba(139,92,246,0.6), 0 0 40px rgba(139,92,246,0.25)",
+                          "0 0 0 2px rgba(6,182,212,0.5), 0 0 25px rgba(6,182,212,0.2)",
+                          "0 0 0 2px rgba(59,130,246,0.4), 0 0 20px rgba(59,130,246,0.15)",
+                        ],
+                      }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     />
                   </motion.div>
                 </div>
@@ -155,40 +168,48 @@ export function AboutSection() {
 
           {/* Bio Text */}
           <SectionReveal direction="right" delay={0.3}>
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+            <div className="min-w-0 space-y-4">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white sm:text-2xl">
                 A passionate developer crafting{" "}
                 <span className="gradient-text">digital experiences</span>
               </h3>
-              <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400">
                 {personalInfo.bio}
               </p>
-              <p className="leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400">
                 I believe in writing clean, maintainable code and staying
                 up-to-date with the latest technologies. When not coding, you
                 can find me exploring new tech, reading about software
                 architecture, or working on open-source projects.
               </p>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-4">
+              <div className="grid grid-cols-3 gap-2 pt-4 sm:gap-4">
                 {[
-                  { number: "2+", label: "Years Experience" },
-                  { number: "10+", label: "Projects" },
-                  { number: "50+", label: "Certificates" },
+                  { number: "2", label: "Years Experience", color: "cyan" },
+                  { number: "10", label: "Projects", color: "cyan" },
+                  { number: "50", label: "Certificates", color: "cyan" },
                 ].map((stat, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
-                    className="rounded-lg border border-neutral-200 bg-white p-3 text-center dark:border-white/[0.1] dark:bg-neutral-900"
+                    whileHover={{ scale: 1.06, y: -3 }}
+                    className={`relative overflow-hidden rounded-xl border p-3 text-center transition-all
+                      ${
+                        stat.color === "blue"
+                          ? "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60 hover:shadow-lg hover:shadow-blue-500/20"
+                          : stat.color === "purple"
+                          ? "border-purple-500/30 bg-purple-500/5 hover:border-purple-500/60 hover:shadow-lg hover:shadow-purple-500/20"
+                          : "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/60 hover:shadow-lg hover:shadow-cyan-500/20"
+                      }`}
                   >
-                    <p className="text-2xl font-bold text-blue-500">
-                      {stat.number}
+                    <p
+                      className={`gsap-stat-number text-2xl font-bold ${
+                        stat.color === "blue" ? "text-blue-500" : stat.color === "purple" ? "text-purple-500" : "text-cyan-500"
+                      }`}
+                      data-target={stat.number}
+                    >
+                      {stat.number}+
                     </p>
-                    <p className="text-xs text-neutral-500">{stat.label}</p>
+                    <p className="mt-0.5 text-xs text-neutral-500">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -201,7 +222,7 @@ export function AboutSection() {
           <SectionReveal>
             <div className="mb-12 text-center">
               <h3 className="text-3xl font-bold text-neutral-900 dark:text-white">
-                My <span className="gradient-text">Education</span>
+                My <span className="gradient-text-shimmer">Education</span>
               </h3>
               <p className="mt-2 text-sm text-neutral-500">
                 Academic background and learning journey

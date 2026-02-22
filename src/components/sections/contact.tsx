@@ -19,6 +19,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { SiGmail } from 'react-icons/si';
+import { Spotlight } from "@/components/ui/decorative-effects";
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub className="h-5 w-5" />,
@@ -82,11 +83,19 @@ export function ContactSection() {
     >
       <BackgroundBeams className="opacity-40" />
       <ParticlesBackground quantity={30} className="opacity-30" />
+      <Spotlight className="left-10 top-20" fill="rgba(59, 130, 246, 0.1)" />
+      <Spotlight className="right-0 bottom-20" fill="rgba(139, 92, 246, 0.08)" />
+
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob animate-glow-pulse absolute -left-20 top-10 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl dark:bg-blue-600/10" />
+        <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute right-10 bottom-16 h-64 w-64 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionReveal>
           <h2 className="section-heading text-neutral-900 dark:text-white">
-            Get In <span className="gradient-text">Touch</span>
+            Get In <span className="gradient-text-shimmer">Touch</span>
           </h2>
           <p className="section-subheading">
             Have a project in mind or want to collaborate? Let&apos;s talk!
@@ -107,10 +116,13 @@ export function ContactSection() {
 
               {/* Contact Details */}
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-white/[0.1] dark:bg-neutral-900">
+                <div className="gsap-contact-item flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 shadow-sm shadow-blue-500/20 transition-all hover:border-blue-500/60 hover:shadow-blue-500/30"
+                  >
                     <FaEnvelope className="h-5 w-5 text-blue-500" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="text-sm text-neutral-500">Email</p>
                     <a
@@ -122,10 +134,13 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-white/[0.1] dark:bg-neutral-900">
+                <div className="gsap-contact-item flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 shadow-sm shadow-blue-500/20 transition-all hover:border-blue-500/60 hover:shadow-blue-500/30"
+                  >
                     <FaMapMarkerAlt className="h-5 w-5 text-blue-500" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="text-sm text-neutral-500">Location</p>
                     <p className="text-sm font-medium text-neutral-900 dark:text-white">
@@ -133,10 +148,13 @@ export function ContactSection() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-white/[0.1] dark:bg-neutral-900">
+                <div className="gsap-contact-item flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 shadow-sm shadow-blue-500/20 transition-all hover:border-blue-500/60 hover:shadow-blue-500/30"
+                  >
                     <FaPhone className="h-5 w-5 text-blue-500" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="text-sm text-neutral-500">Phone</p>
                     <p className="text-sm font-medium text-neutral-900 dark:text-white">
@@ -177,7 +195,7 @@ export function ContactSection() {
 
           {/* Contact Form */}
           <SectionReveal direction="right" delay={0.3}>
-            <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-white/[0.1] dark:bg-neutral-900 md:p-8">
+            <div className="gsap-contact-form relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-white/[0.1] dark:bg-neutral-900 md:p-8">
               <GlowingStarsBackground starCount={60} columns={12} />
 
               {submitted ? (
@@ -219,7 +237,7 @@ export function ContactSection() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:shadow-sm focus:shadow-blue-500/20 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
                         placeholder="Your name"
                       />
                     </div>
@@ -233,7 +251,7 @@ export function ContactSection() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:shadow-sm focus:shadow-blue-500/20 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -248,7 +266,7 @@ export function ContactSection() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white"
+                      className="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:shadow-sm focus:shadow-blue-500/20 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
                       placeholder="Project inquiry"
                     />
                   </div>
@@ -262,7 +280,7 @@ export function ContactSection() {
                       onChange={handleChange}
                       required
                       rows={4}
-                      className="w-full resize-none rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white"
+                      className="w-full resize-none rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:shadow-sm focus:shadow-blue-500/20 dark:border-white/[0.1] dark:bg-neutral-800 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
                       placeholder="Tell me about your project..."
                     />
                   </div>

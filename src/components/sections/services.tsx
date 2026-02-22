@@ -4,7 +4,7 @@ import { services } from "@/data/portfolio-data";
 import { SectionReveal } from "@/components/section-reveal";
 import { HoverEffect } from "@/components/ui/hover-effect";
 import { DotBackground } from "@/components/ui/sparkles";
-import { MovingBorder } from "@/components/ui/decorative-effects";
+import { MovingBorder, Spotlight } from "@/components/ui/decorative-effects";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 
@@ -22,11 +22,20 @@ export function ServicesSection() {
     >
       <DotBackground className="opacity-30 dark:opacity-20" />
       <GlowingStarsBackground starCount={90} columns={18} />
+      <Spotlight className="left-0 -top-10" fill="rgba(59, 130, 246, 0.1)" />
+      <Spotlight className="right-0 top-1/3" fill="rgba(139, 92, 246, 0.08)" />
+
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-blob animate-glow-pulse absolute -right-16 -top-10 h-64 w-64 rounded-full bg-blue-500/12 blur-3xl dark:bg-blue-600/8" />
+        <div className="animate-blob animation-delay-2000 animate-glow-pulse absolute left-10 bottom-20 h-60 w-60 rounded-full bg-purple-500/12 blur-3xl dark:bg-purple-600/8" />
+        <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute left-1/2 top-1/2 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl dark:bg-cyan-600/6" />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionReveal>
           <h2 className="section-heading text-neutral-900 dark:text-white">
-            My <span className="gradient-text">Services</span>
+            My <span className="gradient-text-shimmer">Services</span>
           </h2>
           <p className="section-subheading">
             Professional services I offer to help bring your ideas to life
@@ -41,7 +50,7 @@ export function ServicesSection() {
         <SectionReveal delay={0.3}>
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {services.map((service, idx) => (
-              <CardSpotlight key={service.id}>
+              <CardSpotlight key={service.id} className="gsap-service-card">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}

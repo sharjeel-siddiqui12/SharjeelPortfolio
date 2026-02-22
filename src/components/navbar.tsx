@@ -43,6 +43,7 @@ export function Navbar() {
             className="mr-2 flex items-center gap-2 text-sm font-bold text-neutral-900 dark:text-white md:mr-4 md:text-base"
           >
             <Image
+            
               src="/logo.png"
               alt="Logo"
               width={28}
