@@ -338,12 +338,12 @@ body {
    Only activated on pointer-fine (non-touch) devices.
    Uses mix-blend-mode: difference for a striking invert effect.
    =================================================================== */
+/* Disabled: using default cursor (uncomment to re-enable custom cursor hiding)
 @media (pointer: fine) {
-  /* Hide the native cursor everywhere */
   *, *::before, *::after {
     cursor: none !important;
   }
-}
+} */
 
 .smooth-cursor-dot {
   position: fixed;
