@@ -102,7 +102,7 @@ export function AboutSection() {
         </SectionReveal>
 
         {/* About Content */}
-        <div className="grid gap-8 overflow-hidden md:grid-cols-2 md:items-center">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center">
           {/* Profile Image & Info */}
           <SectionReveal direction="left" delay={0.2}>
             <ThreeDCard className="gsap-about-card mx-auto w-full max-w-md">
@@ -168,15 +168,15 @@ export function AboutSection() {
 
           {/* Bio Text */}
           <SectionReveal direction="right" delay={0.3}>
-            <div className="min-w-0 space-y-4">
-              <h3 className="text-xl font-bold text-neutral-900 dark:text-white sm:text-2xl">
+            <div className="min-w-0 overflow-hidden space-y-4">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white sm:text-2xl break-words">
                 A passionate developer crafting{" "}
                 <span className="gradient-text">digital experiences</span>
               </h3>
-              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400 break-words">
                 {personalInfo.bio}
               </p>
-              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="gsap-bio-text leading-relaxed text-neutral-600 dark:text-neutral-400 break-words">
                 I believe in writing clean, maintainable code and staying
                 up-to-date with the latest technologies. When not coding, you
                 can find me exploring new tech, reading about software
@@ -185,7 +185,7 @@ export function AboutSection() {
 
               <div className="grid grid-cols-3 gap-2 pt-4 sm:gap-4">
                 {[
-                  { number: "2", label: "Years Experience", color: "cyan" },
+                  { number: "2", label: "Years Exp.", color: "cyan" },
                   { number: "10", label: "Projects", color: "cyan" },
                   { number: "50", label: "Certificates", color: "cyan" },
                 ].map((stat, idx) => (
