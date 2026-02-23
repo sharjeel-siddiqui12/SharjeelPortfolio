@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Preloader } from "@/components/preloader";
 // import { SmoothCursor } from "@/components/smooth-cursor"; // Disabled: using default cursor
 
 const geistSans = Geist({
@@ -187,7 +188,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {/* <SmoothCursor /> */} {/* Disabled: using default cursor */}
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Preloader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
