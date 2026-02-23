@@ -1,4 +1,3 @@
-# Robots.txt for SJS Solutions
 # https://sharjeelsiddiqui.info
 
 # Allow all good bots by default
