@@ -102,16 +102,16 @@ export function AboutSection() {
         </SectionReveal>
 
         {/* About Content */}
-        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="grid gap-8 overflow-hidden md:grid-cols-2 md:items-center">
           {/* Profile Image & Info */}
           <SectionReveal direction="left" delay={0.2}>
-            <ThreeDCard className="gsap-about-card mx-auto w-full max-w-md">
-              <CardBody className="p-6">
+            <ThreeDCard className="gsap-about-card mx-auto w-full max-w-xs sm:max-w-md">
+              <CardBody className="p-4 sm:p-6">
                 {/* Profile Image */}
                 <div className="mb-6 flex justify-center">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="relative w-72 aspect-[4/5] overflow-hidden rounded-2xl border-2 border-blue-500/20 shadow-xl shadow-blue-500/10"
+                    className="relative w-full max-w-[288px] aspect-[4/5] overflow-hidden rounded-2xl border-2 border-blue-500/20 shadow-xl shadow-blue-500/10"
                   >
                     <Image
                       src="/profile.png"
