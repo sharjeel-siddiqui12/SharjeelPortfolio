@@ -85,7 +85,7 @@ export function SkillsSection() {
       <Spotlight className="right-0 top-40" fill="rgba(139, 92, 246, 0.08)" />
       <GlowingStarsBackground starCount={80} columns={16} />
 
-      {/* Floating gradient orbs */}
+      {/* Floating gradient orbs — hidden on mobile */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="animate-blob animate-glow-pulse absolute -left-24 top-16 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl dark:bg-blue-600/10" />
         <div className="animate-blob animation-delay-2000 animate-glow-pulse absolute right-0 bottom-1/4 h-64 w-64 rounded-full bg-cyan-500/15 blur-3xl dark:bg-cyan-600/10" />

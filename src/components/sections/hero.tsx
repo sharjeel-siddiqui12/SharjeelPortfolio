@@ -44,10 +44,10 @@ export function HeroSection() {
       {/* Background Beams */}
       <BackgroundBeams />
 
-      {/* Glowing Stars - reduced star count for performance */}
+      {/* Glowing Stars */}
       <GlowingStarsBackground starCount={60} columns={15} />
 
-      {/* Floating gradient orbs - GPU accelerated with contain */}
+      {/* Floating gradient orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ contain: "layout style" }}>
         <div className="hero-blob animate-blob animation-delay-0 animate-glow-pulse absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-600/15" style={{ transform: "translateZ(0)", contain: "layout style" }} />
         <div className="hero-blob animate-blob animation-delay-2000 animate-glow-pulse absolute -right-32 top-1/4 h-80 w-80 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" style={{ transform: "translateZ(0)", contain: "layout style" }} />

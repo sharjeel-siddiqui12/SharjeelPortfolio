@@ -86,7 +86,7 @@ export function ContactSection() {
       <Spotlight className="left-10 top-20" fill="rgba(59, 130, 246, 0.1)" />
       <Spotlight className="right-0 bottom-20" fill="rgba(139, 92, 246, 0.08)" />
 
-      {/* Floating gradient orbs */}
+      {/* Floating gradient orbs — hidden on mobile */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="animate-blob animate-glow-pulse absolute -left-20 top-10 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl dark:bg-blue-600/10" />
         <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute right-10 bottom-16 h-64 w-64 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-600/10" />

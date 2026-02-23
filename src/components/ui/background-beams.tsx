@@ -1,15 +1,15 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  
-  // Generate paths once and memoize
-  const paths = useMemo(() => {
+  const [paths, setPaths] = useState<string[]>([]);
+
+  // Generate random paths only on the client to avoid hydration mismatch
+  useEffect(() => {
     const newPaths: string[] = [];
-    // Reduced from 8 to 5 beams for better performance
     for (let i = 0; i < 5; i++) {
       const startX = Math.random() * 100;
       const cp1X = Math.random() * 100;
@@ -21,7 +21,7 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
         `M${startX} 0 C${cp1X} ${cp1Y} ${cp2X} ${cp2Y} ${endX} 100`
       );
     }
-    return newPaths;
+    setPaths(newPaths);
   }, []);
 
   useEffect(() => {

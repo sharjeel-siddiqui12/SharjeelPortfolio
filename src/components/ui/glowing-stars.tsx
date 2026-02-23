@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
-
 export const GlowingStarsBackground = ({
   className,
   starCount = 80,
@@ -15,7 +14,6 @@ export const GlowingStarsBackground = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const isVisibleRef = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   const updateGlowingStars = useCallback(() => {
     if (!isVisibleRef.current) return;
     const newStars = Array.from({ length: 6 }, () =>

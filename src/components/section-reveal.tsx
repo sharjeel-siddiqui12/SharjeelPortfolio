@@ -2,7 +2,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
-
 interface SectionRevealProps {
   children: ReactNode;
   className?: string;
@@ -19,11 +18,12 @@ export function SectionReveal({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const dist = 40;
   const directions = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
+    up: { y: dist, x: 0 },
+    down: { y: -dist, x: 0 },
+    left: { x: dist, y: 0 },
+    right: { x: -dist, y: 0 },
   };
 
   return (
@@ -45,7 +45,7 @@ export function SectionReveal({
       }
       transition={{
         duration: 0.6,
-        delay: delay,
+        delay,
         ease: [0.21, 0.47, 0.32, 0.98],
       }}
       className={cn(className)}

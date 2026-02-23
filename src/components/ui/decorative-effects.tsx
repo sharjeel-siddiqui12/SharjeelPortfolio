@@ -101,6 +101,7 @@ export const MovingBorder = ({
   className,
   containerClassName,
   borderClassName,
+  borderRadius = "1.75rem",
   as: Component = "button",
   ...otherProps
 }: {
@@ -109,6 +110,7 @@ export const MovingBorder = ({
   className?: string;
   containerClassName?: string;
   borderClassName?: string;
+  borderRadius?: string;
   as?: React.ElementType;
   [key: string]: unknown;
 }) => {
@@ -121,12 +123,12 @@ export const MovingBorder = ({
         "relative overflow-hidden bg-transparent p-[1px] text-xl",
         containerClassName
       )}
-      style={{ borderRadius: "1.75rem" }}
+      style={{ borderRadius }}
       {...otherProps}
     >
       <div
         className="absolute inset-0"
-        style={{ borderRadius: "calc(1.75rem * 0.96)" }}
+        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
         <div
           className={cn("absolute inset-[-1000%] opacity-30 animate-spin-slow", borderClassName)}
@@ -142,7 +144,7 @@ export const MovingBorder = ({
           "relative flex h-full w-full items-center justify-center bg-white text-sm antialiased backdrop-blur-xl dark:bg-neutral-950",
           className
         )}
-        style={{ borderRadius: "calc(1.75rem * 0.96)" }}
+        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
         {children}
       </div>
