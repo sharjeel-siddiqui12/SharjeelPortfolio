@@ -189,52 +189,6 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
-export const projects: Project[] = [
-  // {
-  //   id: 1,
-  //   title: "Pharmacy Management System",
-  //   description:
-  //     "A comprehensive pharmacy management desktop application built with Java using Object-Oriented Programming principles.",
-  //   longDescription:
-  //     "A fully-featured pharmacy management system developed as a desktop application using Java and OOP principles. The system includes inventory management for tracking medicines and stock levels, a billing and invoicing module for customer transactions, prescription tracking for patient records, and detailed reporting for business insights. Built with a clean, intuitive interface designed for pharmacy staff usability.",
-  //   technologies: ["Java", "OOP", "Desktop Application"],
-  //   image: "/projects/pharmacy.jpg",
-  //   liveUrl: "",
-  //   githubUrl: "",
-  //   featured: true,
-  // },
-  {
-    id: 1,
-    title: "Personal Finance Tracker",
-    description:
-      "A comprehensive full-stack personal finance management application built with React, Node.js, Express, and Oracle Database. This application helps users track their income, expenses, budgets, savings goals, and generate detailed financial reports.",
-    longDescription:
-      "A comprehensive full-stack personal finance management application built with React, Node.js, Express, and Oracle Database. This application helps users track their income, expenses, budgets, savings goals, and generate detailed financial reports.",
-    technologies: ["React.js", "Node.js", "Express.js", "Oracle Database"],
-    image: "/projects/personal-finance-app.png",
-    screenshots: [
-      "/projects/personal-finance-app.png",
-      "/projects/personal-finance-app.png",
-    ],
-    // liveUrl: "",
-    githubUrl: "https://github.com/sharjeel-siddiqui12/personal-finance-app",
-    featured: false,
-  },
-  {
-    id: 2,
-    title: "Coming Soon",
-    description: "Exciting new web project in development using the MERN stack. Stay tuned for updates!",
-    technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],
-    featured: false,
-  },
-  // {
-  //   id: 3,
-  //   title: "Coming Soon",
-  //   description: "Another project in the pipeline. More details will be available soon.",
-  //   technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-  //   featured: false,
-  // },
-];
 
 export const services: Service[] = [
   {

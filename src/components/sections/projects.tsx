@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { projects } from "@/data/portfolio-data";
+import { projects } from "@/data/portfolio-data-projects";
 import { Project } from "@/types";
 import { SectionReveal } from "@/components/section-reveal";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
@@ -211,20 +211,18 @@ export function ProjectsSection() {
                         Code
                       </a>
 
-                      <a
-                        href={project.liveUrl || undefined}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium text-white transition-all ${
-                          project.liveUrl
-                            ? "bg-blue-500 hover:bg-blue-600"
-                            : "pointer-events-none bg-blue-500/50"
-                        }`}
-                      >
-                        <FaExternalLinkAlt className="h-3 w-3" />
-                        Live Demo
-                      </a>
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-2.5 text-sm font-medium text-white transition-all hover:bg-blue-600"
+                        >
+                          <FaExternalLinkAlt className="h-3 w-3" />
+                          Live Demo
+                        </a>
+                      )}
                     </div>
                   </CardItem>
                 </CardBody>
@@ -370,19 +368,17 @@ export function ProjectsSection() {
                 Code
               </a>
 
-              <a
-                href={selectedProject.liveUrl || undefined}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-sm font-medium text-white transition-all ${
-                  selectedProject.liveUrl
-                    ? "bg-blue-500 hover:bg-blue-600"
-                    : "pointer-events-none bg-blue-500/50"
-                }`}
-              >
-                <FaExternalLinkAlt className="h-3 w-3" />
-                Live Demo
-              </a>
+              {selectedProject.liveUrl && (
+                <a
+                  href={selectedProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-3 text-sm font-medium text-white transition-all hover:bg-blue-600"
+                >
+                  <FaExternalLinkAlt className="h-3 w-3" />
+                  Live Demo
+                </a>
+              )}
             </div>
           </div>
         )}
