@@ -121,10 +121,9 @@ export function GSAPScrollAnimations() {
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  B. HORIZONTAL SCROLL-SCRUBBED MARQUEE TEXT STRIPS — DESKTOP ONLY
-        //     Large text + scroll-driven transforms are expensive on mobile
+        //  B. HORIZONTAL SCROLL-SCRUBBED MARQUEE TEXT STRIPS
         // ════════════════════════════════════════════════════════════════
-        if (!mobile) {
+        {
           const marqueeConfigs = [
             { id: "#skills",   text: "REACT • NEXT.JS • NODE.JS • TYPESCRIPT • MONGODB • EXPRESS", dir: -1, top: true  },
             { id: "#projects", text: "FULLSTACK • MERN • REST API • DEPLOY • OPTIMIZE • SCALE",    dir:  1, top: false },
@@ -151,7 +150,7 @@ export function GSAPScrollAnimations() {
               const strip = document.createElement("div");
               strip.style.cssText = `
                 white-space: nowrap;
-                font-size: 6rem;
+                font-size: ${mobile ? '2.5rem' : '6rem'};
                 font-weight: 900;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
