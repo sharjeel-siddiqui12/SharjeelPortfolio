@@ -87,7 +87,7 @@ export function Navbar() {
           {/* Mobile Menu Button - CSS transitions instead of Framer Motion */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-8 w-8 flex-col items-center justify-center gap-1 md:hidden cursor-pointer"
+            className="flex h-8 w-8 flex-col items-center justify-center gap-1 md:hidden"
             aria-label="Toggle menu"
           >
             <span
