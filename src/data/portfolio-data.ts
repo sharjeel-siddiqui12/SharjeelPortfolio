@@ -125,7 +125,7 @@ export const education: Education[] = [
     location: "Karachi, Pakistan",
     duration: "2022 - 2026",
     description:
-      "Currently pursuing undergraduate degree with a major in Computer Programming and Backend Development. Focused on building a strong foundation in software development with particular emphasis on backend technologies and modern web development practices.",
+      "Graduated with a Bachelor's degree in Information Technology with a major in Computer Programming, Data Structures and Databases. Focused on building a strong foundation in software development with particular emphasis on both frontend and backend technologies and modern web development practices.",
   },
   {
     id: 2,
@@ -134,7 +134,7 @@ export const education: Education[] = [
     location: "Karachi, Pakistan",
     duration: "2022 - Present",
     description:
-      "Extensive hands-on experience in Website Development using the MERN Stack and WordPress. Additionally, intermediate experience in Desktop Application Development using Java and Object-Oriented Programming principles.",
+      "Extensive hands-on experience in full-stack web development using the MERN Stack, building responsive and production-ready web applications, with additional proficiency in WordPress development including custom themes and client-facing projects.",
   },
 ];
 
