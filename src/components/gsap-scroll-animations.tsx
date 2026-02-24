@@ -126,7 +126,7 @@ export function GSAPScrollAnimations() {
         {
           const marqueeConfigs = [
             { id: "#skills",   text: "REACT • NEXT.JS • NODE.JS • TYPESCRIPT • MONGODB • EXPRESS", dir: -1, top: true  },
-            { id: "#projects", text: "FULLSTACK • MERN • REST API • DEPLOY • OPTIMIZE • SCALE",    dir:  1, top: false },
+            { id: "#projects", text: "FULLSTACK • MERN • REST API • DEPLOY • OPTIMIZE • SCALE",    dir:  1, top: true },
             { id: "#services", text: "DESIGN • DEVELOP • TEST • LAUNCH • MAINTAIN • GROWTH",       dir: -1, top: true  },
           ];
 
