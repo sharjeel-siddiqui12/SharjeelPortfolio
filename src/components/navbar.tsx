@@ -9,12 +9,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { navItems } from "@/data/portfolio-data";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
   const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const { resolvedTheme } = useTheme();
+  const logoSrc = resolvedTheme === "light" ? "/logo-dark.png" : "/logo.png";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,8 +59,7 @@ export function Navbar() {
             className="mr-2 flex items-center gap-2 text-sm font-bold text-neutral-900 dark:text-white md:mr-4 md:text-base"
           >
             <Image
-            
-              src="/logo.png"
+              src={logoSrc}
               alt="Logo"
               width={28}
               height={28}

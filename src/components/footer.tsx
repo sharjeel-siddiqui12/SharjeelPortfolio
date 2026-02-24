@@ -6,6 +6,7 @@ import { navItems, contactInfo } from "@/data/portfolio-data";
 import { FloatingDots } from "@/components/ui/glow-effects";
 import { FaGithub, FaLinkedin, FaWhatsapp, FaHeart } from "react-icons/fa";
 import { SiGmail } from 'react-icons/si';
+import { useTheme } from "next-themes";
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub className="h-5 w-5" />,
@@ -16,6 +17,9 @@ const socialIconMap: Record<string, React.ReactNode> = {
 };
 
 export function Footer() {
+  const { resolvedTheme } = useTheme();
+  const logoSrc = resolvedTheme === "light" ? "/logo-dark.png" : "/logo.png";
+
   return (
     <footer className="relative border-t border-neutral-200 bg-white dark:border-white/[0.05] dark:bg-black">
       {/* Animated Divider */}
@@ -33,7 +37,7 @@ export function Footer() {
           >
             <div className="mb-3 flex items-center gap-3">
               <Image
-                src="/logo.png"
+                src={logoSrc}
                 alt="Logo"
                 width={40}
                 height={40}
