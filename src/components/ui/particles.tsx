@@ -64,7 +64,15 @@ export function ParticlesBackground({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    // Intersection Observer for visibility-based pausing
+    // Auto-reduce on mobile
+    const isMobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
+    const effectiveQuantity = isMobile ? Math.ceil(quantity * 0.5) : quantity;
+    const effectiveConnectionDistance = isMobile ? Math.ceil(connectionDistance * 0.7) : connectionDistance;
+    // Lower FPS on mobile for battery/perf
+    const targetFPS = isMobile ? 20 : 30;
+    const frameInterval = 1000 / targetFPS;
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
@@ -91,7 +99,7 @@ export function ParticlesBackground({
 
     const initParticles = () => {
       const rect = canvas.getBoundingClientRect();
-      particlesRef.current = Array.from({ length: quantity }, () => ({
+      particlesRef.current = Array.from({ length: effectiveQuantity }, () => ({
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
         vx: (Math.random() - 0.5) * 0.3,
@@ -102,10 +110,6 @@ export function ParticlesBackground({
         cellY: 0,
       }));
     };
-
-    // Throttle to ~30fps for better performance
-    const targetFPS = 30;
-    const frameInterval = 1000 / targetFPS;
 
     const draw = (currentTime: number) => {
       if (!isVisibleRef.current) {
@@ -134,7 +138,7 @@ export function ParticlesBackground({
       });
 
       // Update spatial grid
-      updateGrid(particles, connectionDistance);
+      updateGrid(particles, effectiveConnectionDistance);
 
       // Batch particle drawing
       ctx.fillStyle = `rgba(${color}, 0.3)`;
@@ -159,10 +163,10 @@ export function ParticlesBackground({
           const dx = p.x - neighbor.x;
           const dy = p.y - neighbor.y;
           const distSq = dx * dx + dy * dy;
-          const maxDistSq = connectionDistance * connectionDistance;
+          const maxDistSq = effectiveConnectionDistance * effectiveConnectionDistance;
           
           if (distSq < maxDistSq) {
-            const alpha = (1 - Math.sqrt(distSq) / connectionDistance) * 0.2;
+            const alpha = (1 - Math.sqrt(distSq) / effectiveConnectionDistance) * 0.2;
             ctx.strokeStyle = `rgba(${color}, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);

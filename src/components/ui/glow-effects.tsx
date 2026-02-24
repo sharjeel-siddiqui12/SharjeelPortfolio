@@ -69,6 +69,7 @@ export function FloatingDots({ count = 6, className = "" }: FloatingDotsProps) {
   return (
     <div
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      style={{ contain: "layout style paint" }}
     >
       {dots.map((dot, i) => (
         <motion.div

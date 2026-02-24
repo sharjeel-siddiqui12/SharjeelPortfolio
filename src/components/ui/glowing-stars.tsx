@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
+
 export const GlowingStarsBackground = ({
   className,
   starCount = 80,
@@ -10,17 +11,33 @@ export const GlowingStarsBackground = ({
   starCount?: number;
   columns?: number;
 }) => {
+  // Auto-reduce star count & glow count on mobile for performance
+  const [mobileReduced, setMobileReduced] = useState(false);
+  const effectiveStarCount = mobileReduced ? Math.ceil(starCount * 0.4) : starCount;
+  const effectiveColumns = mobileReduced ? Math.ceil(columns * 0.6) : columns;
+  const glowBatch = mobileReduced ? 3 : 6;
+  const intervalMs = mobileReduced ? 5000 : 3000;
+
   const [glowingStars, setGlowingStars] = useState<number[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const isVisibleRef = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Detect mobile once on mount
+  useEffect(() => {
+    const isMobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
+    setMobileReduced(isMobile);
+  }, []);
+
   const updateGlowingStars = useCallback(() => {
     if (!isVisibleRef.current) return;
-    const newStars = Array.from({ length: 6 }, () =>
-      Math.floor(Math.random() * starCount)
+    const newStars = Array.from({ length: glowBatch }, () =>
+      Math.floor(Math.random() * effectiveStarCount)
     );
     setGlowingStars(newStars);
-  }, [starCount]);
+  }, [effectiveStarCount, glowBatch]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -32,7 +49,7 @@ export const GlowingStarsBackground = ({
         isVisibleRef.current = entry.isIntersecting;
         if (entry.isIntersecting && !intervalRef.current) {
           updateGlowingStars();
-          intervalRef.current = setInterval(updateGlowingStars, 3000); // Slower interval
+          intervalRef.current = setInterval(updateGlowingStars, intervalMs);
         } else if (!entry.isIntersecting && intervalRef.current) {
           clearInterval(intervalRef.current);
           intervalRef.current = null;
@@ -46,7 +63,7 @@ export const GlowingStarsBackground = ({
       if (intervalRef.current) clearInterval(intervalRef.current);
       observer.disconnect();
     };
-  }, [updateGlowingStars]);
+  }, [updateGlowingStars, intervalMs]);
 
   // Memoize the star indices set for O(1) lookup
   const glowingSet = useMemo(() => new Set(glowingStars), [glowingStars]);
@@ -60,13 +77,13 @@ export const GlowingStarsBackground = ({
       )}
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gridTemplateColumns: `repeat(${effectiveColumns}, 1fr)`,
         gap: "2px",
         padding: "8px",
         contain: "layout style paint",
       }}
     >
-      {[...Array(starCount)].map((_, idx) => {
+      {[...Array(effectiveStarCount)].map((_, idx) => {
         const isGlowing = glowingSet.has(idx);
         return (
           <div

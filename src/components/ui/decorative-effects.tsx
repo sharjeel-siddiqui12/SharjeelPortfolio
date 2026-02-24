@@ -159,6 +159,16 @@ export const Spotlight = ({
   className?: string;
   fill?: string;
 }) => {
+  // Reduce blur filter intensity on mobile — feGaussianBlur is very GPU-heavy
+  const [blurStdDev, setBlurStdDev] = React.useState(151);
+
+  React.useEffect(() => {
+    const isMobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
+    if (isMobile) setBlurStdDev(60);
+  }, []);
+
   return (
     <svg
       className={cn(
@@ -198,7 +208,7 @@ export const Spotlight = ({
             result="shape"
           />
           <feGaussianBlur
-            stdDeviation="151"
+            stdDeviation={blurStdDev}
             result="effect1_foregroundBlur_1065_8"
           />
         </filter>

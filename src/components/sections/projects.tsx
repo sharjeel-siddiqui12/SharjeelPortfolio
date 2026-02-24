@@ -51,7 +51,7 @@ export function ProjectsSection() {
       <GlowingStarsBackground starCount={60} columns={14} />
 
       {/* Floating gradient orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ contain: 'layout style paint' }}>
         <div className="animate-blob animate-glow-pulse absolute -top-16 left-1/4 h-72 w-72 rounded-full bg-blue-500/12 blur-3xl dark:bg-blue-600/8" />
         <div className="animate-blob animation-delay-2000 animate-glow-pulse absolute right-10 top-1/3 h-64 w-64 rounded-full bg-purple-500/12 blur-3xl dark:bg-purple-600/8" />
         <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute bottom-20 left-10 h-60 w-60 rounded-full bg-cyan-500/10 blur-3xl dark:bg-cyan-600/8" />

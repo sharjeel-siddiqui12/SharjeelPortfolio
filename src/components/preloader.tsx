@@ -2,13 +2,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 
 export function Preloader() {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"loading" | "complete" | "exit">("loading");
-  const { resolvedTheme } = useTheme();
-  const logoSrc = resolvedTheme === "light" ? "/logo-dark.png" : "/logo.png";
 
   const simulateLoading = useCallback(() => {
     let current = 0;
@@ -126,7 +123,7 @@ export function Preloader() {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Image
-                    src={logoSrc}
+                    src="/logo.png"
                     alt="Sharjeel Siddiqui"
                     width={56}
                     height={56}

@@ -9,8 +9,12 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
 
   // Generate random paths only on the client to avoid hydration mismatch
   useEffect(() => {
+    const isMobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
+    const pathCount = isMobile ? 3 : 5; // Fewer paths on mobile
     const newPaths: string[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < pathCount; i++) {
       const startX = Math.random() * 100;
       const cp1X = Math.random() * 100;
       const cp1Y = Math.random() * 50 + 20;

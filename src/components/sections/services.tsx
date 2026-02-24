@@ -25,8 +25,8 @@ export function ServicesSection() {
       <Spotlight className="left-0 -top-10" fill="rgba(59, 130, 246, 0.1)" />
       <Spotlight className="right-0 top-1/3" fill="rgba(139, 92, 246, 0.08)" />
 
-      {/* Floating gradient orbs — hidden on mobile */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ contain: 'layout style paint' }}>
         <div className="animate-blob animate-glow-pulse absolute -right-16 -top-10 h-64 w-64 rounded-full bg-blue-500/12 blur-3xl dark:bg-blue-600/8" />
         <div className="animate-blob animation-delay-2000 animate-glow-pulse absolute left-10 bottom-20 h-60 w-60 rounded-full bg-purple-500/12 blur-3xl dark:bg-purple-600/8" />
         <div className="animate-blob animation-delay-4000 animate-glow-pulse absolute left-1/2 top-1/2 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl dark:bg-cyan-600/6" />

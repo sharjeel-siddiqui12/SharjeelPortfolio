@@ -433,3 +433,70 @@ section {
 .animate-cursor-blink {
   animation: cursor-blink 1s ease-in-out infinite;
 }
+
+/* ===================================================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Reduces animation complexity and GPU load on mobile/touch devices
+   without removing any visual effects. Effects are lighter, not gone.
+   =================================================================== */
+
+@media (pointer: coarse), (max-width: 767px) {
+  /* CSS containment on every section — isolates layout/paint recalcs */
+  section {
+    contain: layout style paint;
+  }
+
+  /* content-visibility lets the browser skip rendering off-screen sections */
+  section:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100vh;
+  }
+
+  /* Reduce blur intensity on blob orbs: blur-3xl (48px) → ~20px */
+  .blur-3xl {
+    filter: blur(20px) !important;
+    -webkit-filter: blur(20px) !important;
+  }
+
+  /* Slow down blob morphing on mobile */
+  .animate-blob {
+    animation-duration: 28s !important;
+  }
+
+  /* Slow down glow-pulse on mobile */
+  .animate-glow-pulse {
+    animation-duration: 8s !important;
+  }
+
+  /* Slow down gradient shimmer text */
+  .gradient-text-shimmer {
+    animation-duration: 8s !important;
+  }
+
+  /* Reduce ping/pulse animation frequency */
+  .animate-ping-slow {
+    animation-duration: 3.5s !important;
+  }
+
+  /* Disable will-change on mobile (forces GPU layers, eats memory) */
+  .animate-float,
+  .animate-float-slow,
+  [class^="parallax-orb-"] {
+    will-change: auto !important;
+  }
+
+  /* Simplify spotlight animation */
+  .animate-spotlight {
+    animation-duration: 1s !important;
+  }
+
+  /* Slow down beam animations */
+  .animate-beam {
+    animation-duration: 8s !important;
+  }
+
+  /* Reduce card hover glow on mobile (not needed for touch) */
+  .card-glow:hover {
+    box-shadow: none;
+  }
+}
