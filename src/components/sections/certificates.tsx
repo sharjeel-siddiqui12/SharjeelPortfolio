@@ -4,6 +4,8 @@ import { certificates } from "@/data/portfolio-data";
 import { Certificate } from "@/types";
 import { SectionReveal } from "@/components/section-reveal";
 import { AnimatedModal } from "@/components/ui/animated-modal";
+import { AppleCardsCarousel } from "@/components/ui/apple-cards-carousel";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Sparkles } from "@/components/ui/sparkles";
 import { FaCertificate, FaExternalLinkAlt, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import Link from "next/link";
@@ -13,6 +15,46 @@ import { useState } from "react";
 export function CertificatesSection() {
   const displayCerts = certificates.slice(0, 6);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const isMobile = useIsMobile();
+
+  // Apple Cards data for mobile carousel
+  const appleCards = displayCerts.map((cert) => ({
+    src: cert.image || "",
+    title: cert.title,
+    category: cert.issuer,
+    content: (
+      <div className="space-y-5">
+        <div>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+            {cert.title}
+          </h2>
+          <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
+            Issued by {cert.issuer}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-neutral-500">
+          <FaCalendarAlt className="h-3.5 w-3.5" />
+          {cert.date || "N/A"}
+        </div>
+        {cert.description && (
+          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {cert.description}
+          </p>
+        )}
+        {cert.credentialUrl && (
+          <a
+            href={cert.credentialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-blue-600"
+          >
+            <FaExternalLinkAlt className="h-3 w-3" />
+            View Credential
+          </a>
+        )}
+      </div>
+    ),
+  }));
 
   return (
     <section
@@ -32,6 +74,10 @@ export function CertificatesSection() {
           </p>
         </SectionReveal>
 
+        {/* Mobile: Apple Cards Carousel */}
+        {isMobile ? (
+          <AppleCardsCarousel cards={appleCards} />
+        ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {displayCerts.map((cert, idx) => (
             <motion.div
@@ -73,6 +119,7 @@ export function CertificatesSection() {
             </motion.div>
           ))}
         </div>
+        )}
 
         {/* View All */}
         <SectionReveal delay={0.4}>

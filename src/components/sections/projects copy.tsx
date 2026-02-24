@@ -8,12 +8,11 @@ import { MovingBorder } from "@/components/ui/decorative-effects";
 import { Spotlight } from "@/components/ui/decorative-effects";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
 import { AnimatedModal } from "@/components/ui/animated-modal";
-import { AppleCardsCarousel } from "@/components/ui/apple-cards-carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 
 export function ProjectsSection() {
@@ -68,75 +67,7 @@ export function ProjectsSection() {
 
         {/* Mobile Carousel */}
         {isMobile ? (
-          <AppleCardsCarousel
-            cards={displayProjects.map((project) => ({
-              src: project.image || "",
-              title: project.title,
-              category: project.description,
-              tags: project.technologies.slice(0, 4),
-              screenshots: project.screenshots,
-              content: (
-                <div className="space-y-5">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      {project.featured && (
-                        <span className="rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                          Featured
-                        </span>
-                      )}
-                    </div>
-                    <h2 className="mt-1 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-                      {project.title}
-                    </h2>
-                  </div>
-
-                  <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                    {project.longDescription || project.description}
-                  </p>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600 dark:border-white/10 dark:bg-neutral-800 dark:text-neutral-400"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.githubUrl || undefined}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex flex-1 items-center justify-center gap-2 rounded-xl border border-neutral-200 py-3 text-sm font-medium transition-all dark:border-white/10 ${
-                        project.githubUrl
-                          ? "text-neutral-700 hover:border-blue-500 hover:text-blue-500 dark:text-neutral-300"
-                          : "pointer-events-none text-neutral-400 dark:text-neutral-600"
-                      }`}
-                    >
-                      <FaGithub className="h-4 w-4" />
-                      Code
-                    </a>
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-3 text-sm font-medium text-white transition-all hover:bg-blue-600"
-                      >
-                        <FaExternalLinkAlt className="h-3 w-3" />
-                        Live Demo
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ),
-            }))}
-          />
+          <ProjectsMobileCarousel projects={displayProjects} openModal={openModal} />
         ) : (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {displayProjects.map((project, idx) => (
@@ -460,5 +391,170 @@ export function ProjectsSection() {
         )}
       </AnimatedModal>
     </section>
+  );
+}
+
+/* ── Smooth native-scroll mobile carousel (like Apple Cards) ── */
+function ProjectsMobileCarousel({
+  projects,
+  openModal,
+}: {
+  projects: Project[];
+  openModal: (project: Project) => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkScroll();
+  }, [checkScroll]);
+
+  const scroll = (dir: "left" | "right") => {
+    if (scrollRef.current) {
+      const amount = scrollRef.current.clientWidth * 0.92;
+      scrollRef.current.scrollBy({
+        left: dir === "left" ? -amount : amount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  return (
+    <div className="relative w-full py-8">
+      <div
+        ref={scrollRef}
+        onScroll={checkScroll}
+        className="flex w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {projects.map((project, idx) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.5, delay: 0.1 * idx, ease: "easeOut" },
+            }}
+            className="w-[92vw] shrink-0 snap-center"
+          >
+            <div
+              className="cursor-pointer rounded-2xl border border-neutral-200 bg-white/80 p-5 backdrop-blur-sm transition-all dark:border-white/10 dark:bg-neutral-950/80"
+              onClick={() => openModal(project)}
+            >
+              {/* Project Image */}
+              <div className="relative h-52 w-full overflow-hidden rounded-xl">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    sizes="85vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center bg-linear-to-br from-blue-500/20 via-cyan-500/20 to-purple-500/20">
+                    <span className="text-2xl font-black text-neutral-300 dark:text-neutral-600">
+                      {project.title.split(" ").map((w) => w[0]).join("")}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Title & Featured Badge */}
+              <div className="mt-4 flex items-center gap-2">
+                {project.featured && (
+                  <span className="rounded-full bg-blue-500/10 px-2 py-0.5 text-xs font-medium text-blue-500">
+                    Featured
+                  </span>
+                )}
+              </div>
+              <h3 className="mt-1 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                {project.title}
+              </h3>
+
+              {/* Description */}
+              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                {project.description}
+              </p>
+
+              {/* Tech Stack */}
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {project.technologies.slice(0, 4).map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:border-white/10 dark:bg-neutral-800 dark:text-neutral-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.technologies.length > 4 && (
+                  <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
+                    +{project.technologies.length - 4}
+                  </span>
+                )}
+              </div>
+
+              {/* Code & Live Demo Links */}
+              <div className="mt-4 flex gap-3">
+                <a
+                  href={project.githubUrl || undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-xl border border-neutral-200 py-2.5 text-sm font-medium transition-all dark:border-white/10 ${
+                    project.githubUrl
+                      ? "text-neutral-700 hover:border-blue-500 hover:text-blue-500 dark:text-neutral-300"
+                      : "pointer-events-none text-neutral-400 dark:text-neutral-600"
+                  }`}
+                >
+                  <FaGithub className="h-4 w-4" />
+                  Code
+                </a>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-2.5 text-sm font-medium text-white transition-all hover:bg-blue-600"
+                  >
+                    <FaExternalLinkAlt className="h-3 w-3" />
+                    Live Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Navigation buttons */}
+      <div className="mt-4 flex justify-center gap-3">
+        <button
+          onClick={() => scroll("left")}
+          disabled={!canScrollLeft}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-colors disabled:opacity-30 dark:bg-neutral-800"
+        >
+          <FaChevronLeft className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-300" />
+        </button>
+        <button
+          onClick={() => scroll("right")}
+          disabled={!canScrollRight}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-colors disabled:opacity-30 dark:bg-neutral-800"
+        >
+          <FaChevronRight className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-300" />
+        </button>
+      </div>
+    </div>
   );
 }

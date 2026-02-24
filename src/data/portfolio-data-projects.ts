@@ -39,7 +39,7 @@ export const projects: Project[] = [
       "/projects/personal-finance-app/3.png",
       "/projects/personal-finance-app/4.png",
       "/projects/personal-finance-app/5.png",
-      "/projects/personal-finance-app/6.png",
+      // "/projects/personal-finance-app/6.png",
       "/projects/personal-finance-app/7.png",
       "/projects/personal-finance-app/8.png",
       "/projects/personal-finance-app/9.png",
