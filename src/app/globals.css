@@ -446,11 +446,7 @@ section {
     contain: layout style paint;
   }
 
-  /* content-visibility lets the browser skip rendering off-screen sections */
-  section:not(:first-of-type) {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 100vh;
-  }
+  /* Note: content-visibility:auto removed — it breaks GSAP ScrollTrigger scroll calculations */
 
   /* Reduce blur intensity on blob orbs: blur-3xl (48px) → ~20px */
   .blur-3xl {

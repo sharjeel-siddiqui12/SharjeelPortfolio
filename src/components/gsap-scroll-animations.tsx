@@ -130,53 +130,51 @@ export function GSAPScrollAnimations() {
             { id: "#services", text: "DESIGN • DEVELOP • TEST • LAUNCH • MAINTAIN • GROWTH",       dir: -1, top: true  },
           ];
 
-          scheduleInit(() => {
-            marqueeConfigs.forEach(({ id, text, dir, top }) => {
-              const section = document.querySelector<HTMLElement>(id);
-              if (!section) return;
+          marqueeConfigs.forEach(({ id, text, dir, top }) => {
+            const section = document.querySelector<HTMLElement>(id);
+            if (!section) return;
 
-              const wrapper = document.createElement("div");
-              wrapper.setAttribute("aria-hidden", "true");
-              wrapper.style.cssText = `
-                position: absolute;
-                ${top ? "top: 12px" : "bottom: 12px"};
-                left: 0; right: 0;
-                overflow: hidden;
-                pointer-events: none;
-                z-index: 0;
-                opacity: 0.045;
-                contain: layout style;
-              `;
-              const strip = document.createElement("div");
-              strip.style.cssText = `
-                white-space: nowrap;
-                font-size: ${mobile ? '2.5rem' : '6rem'};
-                font-weight: 900;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                line-height: 1;
-                display: inline-block;
-                color: currentColor;
-                will-change: transform;
-                transform: translateZ(0);
-              `;
-              strip.textContent = `${text}    ${text}    ${text}`;
-              wrapper.appendChild(strip);
-              section.insertBefore(wrapper, section.firstChild);
-              injectedEls.current.push(wrapper);
+            const wrapper = document.createElement("div");
+            wrapper.setAttribute("aria-hidden", "true");
+            wrapper.style.cssText = `
+              position: absolute;
+              ${top ? "top: 12px" : "bottom: 12px"};
+              left: 0; right: 0;
+              overflow: hidden;
+              pointer-events: none;
+              z-index: 0;
+              opacity: 0.045;
+              contain: layout style;
+            `;
+            const strip = document.createElement("div");
+            strip.style.cssText = `
+              white-space: nowrap;
+              font-size: ${mobile ? '2.5rem' : '6rem'};
+              font-weight: 900;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              line-height: 1;
+              display: inline-block;
+              color: currentColor;
+              will-change: transform;
+              transform: translateZ(0);
+            `;
+            strip.textContent = `${text}    ${text}    ${text}`;
+            wrapper.appendChild(strip);
+            section.insertBefore(wrapper, section.firstChild);
+            injectedEls.current.push(wrapper);
 
-              const startX = dir === -1 ? 0 : -25;
-              const endX = dir === -1 ? -25 : 0;
-              gsap.set(strip, { xPercent: startX });
-              
-              ScrollTrigger.create({
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                onUpdate: (self) => {
-                  gsap.set(strip, { xPercent: startX + (endX - startX) * self.progress });
-                },
-              });
+            const startX = dir === -1 ? 0 : -25;
+            const endX = dir === -1 ? -25 : 0;
+            gsap.set(strip, { xPercent: startX });
+            
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              onUpdate: (self) => {
+                gsap.set(strip, { xPercent: startX + (endX - startX) * self.progress });
+              },
             });
           });
         }
