@@ -34,6 +34,7 @@ export const projects: Project[] = [
     technologies: ["React.js", "Node.js", "Express.js", "Oracle Database"],
     image: "/projects/personal-finance-app/dashboard.png",
     screenshots: [
+      "/projects/personal-finance-app/dashboard.png",
       "/projects/personal-finance-app/personal-finance-app.png",
       "/projects/personal-finance-app/1.png",
       "/projects/personal-finance-app/2.png",
