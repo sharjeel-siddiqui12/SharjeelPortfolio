@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect, useCallback, useId } from "react";
 import { motion, AnimatePresence, useMotionValue } from "framer-motion";
-import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaTimes, FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import Image from "next/image";
 
 interface AppleCard {
@@ -11,6 +11,8 @@ interface AppleCard {
   content: React.ReactNode;
   screenshots?: string[];
   tags?: string[];
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
 interface AppleCardsCarouselProps {
@@ -166,6 +168,36 @@ function AppleCardItem({ card, index }: { card: AppleCard; index: number }) {
                   {tag}
                 </span>
               ))}
+            </div>
+          )}
+          
+          {/* Action Buttons */}
+          {(card.githubUrl || card.liveUrl) && (
+            <div className="mt-3 flex gap-2">
+              {card.githubUrl && (
+                <a
+                  href={card.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-neutral-200 py-1.5 text-xs font-medium text-neutral-700 transition-all hover:border-blue-500 hover:text-blue-500 dark:border-white/10 dark:text-neutral-300"
+                >
+                  <FaGithub className="h-3 w-3" />
+                  Code
+                </a>
+              )}
+              {card.liveUrl && (
+                <a
+                  href={card.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-500 py-1.5 text-xs font-medium text-white transition-all hover:bg-blue-600"
+                >
+                  <FaExternalLinkAlt className="h-2.5 w-2.5" />
+                  Demo
+                </a>
+              )}
             </div>
           )}
         </div>

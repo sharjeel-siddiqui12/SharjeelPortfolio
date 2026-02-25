@@ -87,9 +87,30 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/sharjeel-siddiqui12/smart-data-storage-manager-for-distributed-database-systems",
     featured: false,
   },
-
   {
     id: 3,
+    title: "Gym Portfolio Website",
+    description:
+      "A modern, fully responsive gym and fitness website built with React, Vite, and TailwindCSS. CoreFit features a clean UI, smooth navigation, a class timetable, pricing plans, a contact form with an embedded map, and much more — perfect for any gym or fitness center looking for a professional web presence.",
+    longDescription:
+      "A modern, fully responsive gym and fitness website built with React, Vite, and TailwindCSS. CoreFit features a clean UI, smooth navigation, a class timetable, pricing plans, a contact form with an embedded map, and much more — perfect for any gym or fitness center looking for a professional web presence.",
+    technologies: ["React.js", "Tailwind CSS", "Vite", "JavaScript"],
+    image: "/projects/gym-portfolio/mainSS.png",
+    screenshots: [
+      "/projects/gym-portfolio/mainSS.png",
+      "/projects/gym-portfolio/1.png",
+      "/projects/gym-portfolio/2.png",
+      "/projects/gym-portfolio/3.png",
+      "/projects/gym-portfolio/4.png",
+      "/projects/gym-portfolio/5.png",
+    ],
+    liveUrl: "https://core-fit.netlify.app/",
+    githubUrl: "https://github.com/sharjeel-siddiqui12/gym-website-using-react/",
+    featured: true,
+  },
+
+  {
+    id: 4,
     title: "Coming Soon",
     description: "",
     technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],

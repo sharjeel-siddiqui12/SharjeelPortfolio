@@ -75,6 +75,8 @@ export function ProjectsSection() {
               category: project.description,
               tags: project.technologies.slice(0, 4),
               screenshots: project.screenshots,
+              githubUrl: project.githubUrl,
+              liveUrl: project.liveUrl,
               content: (
                 <div className="space-y-5">
                   <div>

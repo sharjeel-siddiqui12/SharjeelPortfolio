@@ -76,17 +76,26 @@ export function ProjectsPageContent() {
               >
                 <CardContainer containerClassName="py-0">
                   <CardBody className="group relative w-full rounded-2xl border border-neutral-200 bg-white/80 p-6 backdrop-blur-sm dark:border-white/[0.1] dark:bg-neutral-950/80">
-                    {/* Project Image Placeholder */}
+                    {/* Project Image */}
                     <CardItem translateZ={50} className="w-full">
                       <div className="relative h-48 w-full overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/20 via-cyan-500/20 to-purple-500/20">
-                        <div className="flex h-full items-center justify-center">
-                          <span className="text-2xl font-bold text-neutral-400 dark:text-neutral-600">
-                            {project.title
-                              .split(" ")
-                              .map((w) => w[0])
-                              .join("")}
-                          </span>
-                        </div>
+                        {project.image || (project.screenshots && project.screenshots.length > 0) ? (
+                          <Image
+                            src={project.screenshots?.[0] || project.image!}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center">
+                            <span className="text-2xl font-bold text-neutral-400 dark:text-neutral-600">
+                              {project.title
+                                .split(" ")
+                                .map((w) => w[0])
+                                .join("")}
+                            </span>
+                          </div>
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                       </div>
                     </CardItem>
