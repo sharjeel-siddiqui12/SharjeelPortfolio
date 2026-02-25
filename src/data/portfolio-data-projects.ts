@@ -32,8 +32,9 @@ export const projects: Project[] = [
     longDescription:
       "A comprehensive full-stack personal finance management application built with React, Node.js, Express, and Oracle Database. This application helps users track their income, expenses, budgets, savings goals, and generate detailed financial reports.",
     technologies: ["React.js", "Node.js", "Express.js", "Oracle Database"],
-    image: "/projects/personal-finance-app/personal-finance-app.png",
+    image: "/projects/personal-finance-app/dashboard.png",
     screenshots: [
+      "/projects/personal-finance-app/personal-finance-app.png",
       "/projects/personal-finance-app/1.png",
       "/projects/personal-finance-app/2.png",
       "/projects/personal-finance-app/3.png",
