@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Preloader } from "@/components/preloader";
 // import { SmoothCursor } from "@/components/smooth-cursor"; // Disabled: using default cursor
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -174,8 +175,7 @@ export default function RootLayout({
         "@type": "WebPage",
         "@id": `${siteUrl}/#webpage`,
         url: siteUrl,
-        name:
-          "Sharjeel Siddiqui | MERN Stack Developer & Full Stack Engineer",
+        name: "Sharjeel Siddiqui | MERN Stack Developer & Full Stack Engineer",
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#person` },
         description:
@@ -217,6 +217,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Preloader />
           {children}
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
