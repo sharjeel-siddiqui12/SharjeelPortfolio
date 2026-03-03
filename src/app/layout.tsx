@@ -106,9 +106,9 @@ export const metadata: Metadata = {
     creator: "@sharjeelsiddiqui",
   },
 
-  verification: {
-    google: "ADD_YOUR_GOOGLE_SITE_VERIFICATION_CODE_HERE",
-  },
+  // verification: {
+  //   google: "ADD_YOUR_GOOGLE_SITE_VERIFICATION_CODE_HERE",
+  // },
 
   category: "technology",
 };
