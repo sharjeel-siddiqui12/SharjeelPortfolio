@@ -108,12 +108,45 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/sharjeel-siddiqui12/gym-website-using-react/",
     featured: true,
   },
-
   {
     id: 4,
+    title: "Padel Arena Website",
+    description:
+      "Padel Arena is a Next.js 14 web application for a premium padel sports facility. It lets users browse and book padel courts online (with real-time availability and dynamic peak/off-peak pricing), find opponents through an Open Match system with skill-level filtering, explore professional coaching programs, and view a photo gallery of the facility. Authenticated users get a personal dashboard to manage bookings and match requests, while admins have a dedicated dashboard with revenue stats, booking tables, and CSV export. The UI is built with Tailwind CSS and Framer Motion for smooth animations, and the app integrates WhatsApp for booking confirmations and direct communication.",
+    longDescription:
+      "Padel Arena is a Next.js 14 web application for a premium padel sports facility. It lets users browse and book padel courts online (with real-time availability and dynamic peak/off-peak pricing), find opponents through an Open Match system with skill-level filtering, explore professional coaching programs, and view a photo gallery of the facility. Authenticated users get a personal dashboard to manage bookings and match requests, while admins have a dedicated dashboard with revenue stats, booking tables, and CSV export. The UI is built with Tailwind CSS and Framer Motion for smooth animations, and the app integrates WhatsApp for booking confirmations and direct communication.",
+    technologies: ["Next.js", "Tailwind CSS", "CSS", "JavaScript"],
+    image: "/projects/padel-arena/1.png",
+    screenshots: [
+      "/projects/padel-arena/mainSS.png",
+      "/projects/padel-arena/1.png",
+      "/projects/padel-arena/2.png",
+      "/projects/padel-arena/3.png",
+      "/projects/padel-arena/4.png",
+      "/projects/padel-arena/5.png",
+      "/projects/padel-arena/6.png",
+      "/projects/padel-arena/7.png",
+      "/projects/padel-arena/8.png",
+      "/projects/padel-arena/9.png",
+      "/projects/padel-arena/10.png",
+      "/projects/padel-arena/11.png",
+      "/projects/padel-arena/12.png",
+      "/projects/padel-arena/13.png",
+      "/projects/padel-arena/14.png",
+      "/projects/padel-arena/15.png",
+      "/projects/padel-arena/16.png",
+      "/projects/padel-arena/17.png",
+    ],
+    liveUrl: "https://pedal-arena.vercel.app/",
+    githubUrl: "https://github.com/sharjeel-siddiqui12/padel-arena",
+    featured: true,
+  },
+
+  {
+    id: 5,
     title: "Coming Soon",
     description: "",
-    technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],
+    technologies: [""],
     featured: false,
   },
   // {
