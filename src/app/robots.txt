@@ -29,4 +29,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://sharjeelsiddiqui.info/sitemap.xml
-Sitemap: https://www.sharjeelsiddiqui.info/sitemap.xml
