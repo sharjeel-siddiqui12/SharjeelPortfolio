@@ -118,7 +118,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Tailwind CSS", "CSS", "JavaScript"],
     image: "/projects/padel-arena/1.png",
     screenshots: [
-      // "/projects/padel-arena/1.png",
+      "/projects/padel-arena/1.png",
       "/projects/padel-arena/2.png",
       "/projects/padel-arena/3.png",
       "/projects/padel-arena/4.png",
