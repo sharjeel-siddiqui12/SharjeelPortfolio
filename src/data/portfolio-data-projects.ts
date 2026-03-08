@@ -140,9 +140,38 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/sharjeel-siddiqui12/padel-arena",
     featured: true,
   },
-
   {
     id: 5,
+    title: "Restaurant Portfolio Website",
+    description:
+      "A premium fine dining restaurant website built with Next.js 16, React 19, Tailwind CSS 4, and Framer Motion. Features a dark luxury theme with gold accents, full-screen hero slider, animated statistics, interactive menu with category filtering, event listings, testimonial masonry grid, reservation form, and FAQ accordion — all with scroll-triggered animations and fully responsive design.",
+    longDescription:
+      "A premium fine dining restaurant website built with Next.js 16, React 19, Tailwind CSS 4, and Framer Motion. Features a dark luxury theme with gold accents, full-screen hero slider, animated statistics, interactive menu with category filtering, event listings, testimonial masonry grid, reservation form, and FAQ accordion — all with scroll-triggered animations and fully responsive design.",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
+    image: "/projects/restaurant-portfolio/1.png",
+    screenshots: [
+      "/projects/restaurant-portfolio/1.png",
+      "/projects/restaurant-portfolio/2.png",
+      "/projects/restaurant-portfolio/3.png",
+      "/projects/restaurant-portfolio/4.png",
+      "/projects/restaurant-portfolio/5.png",
+      "/projects/restaurant-portfolio/6.png",
+      "/projects/restaurant-portfolio/7.png",
+      "/projects/restaurant-portfolio/8.png",
+      "/projects/restaurant-portfolio/9.png",
+      "/projects/restaurant-portfolio/10.png",
+      "/projects/restaurant-portfolio/11.png",
+      "/projects/restaurant-portfolio/12.png",
+      "/projects/restaurant-portfolio/13.png",
+      "/projects/restaurant-portfolio/14.png",
+    ],
+    liveUrl: "https://next-restaurant-portfolio.vercel.app/",
+    githubUrl: "https://github.com/sharjeel-siddiqui12/next-restaurant-portfolio",
+    featured: true,
+  },
+
+  {
+    id: 6,
     title: "Coming Soon",
     description: "",
     technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],
