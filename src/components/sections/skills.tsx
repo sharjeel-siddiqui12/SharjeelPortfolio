@@ -6,7 +6,8 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { Spotlight } from "@/components/ui/decorative-effects";
 import { GlowingStarsBackground } from "@/components/ui/glowing-stars";
-import { FaReact,
+import { FaReact, 
+  // FaNext,
   FaNodeJs,
   FaHtml5,
   FaCss3Alt,

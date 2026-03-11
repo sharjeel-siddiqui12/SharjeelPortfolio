@@ -349,6 +349,7 @@ export const contactInfo: ContactInfo = {
 };
 
 export const techStack = [
+  "Next.js",
   "React.js",
   "Node.js",
   "Express.js",
