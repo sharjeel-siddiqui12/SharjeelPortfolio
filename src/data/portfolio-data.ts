@@ -149,6 +149,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "CSS3", level: 100 },
       { name: "JavaScript", level: 90 },
       { name: "React.js", level: 70 },
+      { name: "Next.js", level: 60 },
     ],
   },
   {
