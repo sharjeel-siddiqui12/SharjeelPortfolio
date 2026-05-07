@@ -170,6 +170,7 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "HTML5", level: 100 },
       { name: "CSS3", level: 100 },
+      { name: "Tailwind CSS", level: 100 },
       { name: "JavaScript", level: 90 },
       { name: "React.js", level: 70 },
       { name: "Next.js", level: 60 },
@@ -184,6 +185,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Node.js", level: 80 },
       { name: "Express.js", level: 80 },
       { name: "PHP", level: 60 },
+      { name: ".NET Core", level: 30 },
     ],
   },
   {
@@ -195,6 +197,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "MongoDB", level: 80 },
       { name: "MySQL", level: 90 },
       { name: "Oracle", level: 90 },
+      { name: "SPARQL (RDF/Graph)", level: 60 },
     ],
   },
   {
@@ -203,6 +206,7 @@ export const skillCategories: SkillCategory[] = [
     description: "Essential development tools and practices",
     icon: "🛠️",
     skills: [
+      { name: "Electron", level: 90 },
       { name: "WordPress", level: 85 },
       { name: "Protégé", level: 80 },
       // { name: "Java", level: 80 },

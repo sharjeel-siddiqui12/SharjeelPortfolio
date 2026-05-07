@@ -33,6 +33,8 @@ import {
   SiGraphql,
   SiBootstrap,
   SiOracle,
+  SiDotnet, 
+  SiElectron,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -61,12 +63,15 @@ const techIconMap: Record<string, React.ReactNode> = {
   Mongoose: <SiMongodb className="h-5 w-5 text-red-600" />,
   MySQL: <FaDatabase className="h-5 w-5 text-blue-600" />,
   Oracle: <SiOracle className="h-5 w-5 text-red-500" />,
+  "SPARQL (RDF/Graph)": <FaDatabase className="h-5 w-5 text-green-600" />,
   PHP: <FaPhp className="h-5 w-5 text-indigo-500" />,
+  Electron: <SiElectron className="h-5 w-5 text-gray-400" />,
   WordPress: <FaWordpress className="h-5 w-5 text-blue-500" />,
   Java: <FaJava className="h-5 w-5 text-orange-600" />,
   Protégé: <FaDatabase className="h-5 w-5 text-purple-500" />,
   Authentication: <FaDatabase className="h-5 w-5 text-green-500" />,
   "npm/yarn": <FaNodeJs className="h-5 w-5 text-red-500" />,
+  ".NET Core": <SiDotnet className="h-5 w-5 text-purple-500" />,
   Linux: <FaLinux className="h-5 w-5 text-yellow-600" />,
   "Git & GitHub": <FaGitAlt className="h-5 w-5 text-orange-600" />,
 };
