@@ -121,7 +121,7 @@ export const experiences: Experience[] = [
     title: "Custom & WordPress Web Developer",
     company: "IT-O-LOGY",
     location: "Karachi (Onsite)",
-    duration: "Jan 2023 - Nov 2023",
+    duration: "Mar 2023 - Nov 2023",
     description: [
       "Designed and developed business websites, landing pages, and marketing platforms using custom development and WordPress",
       "Customized WordPress themes and plugins to meet specific client requirements",
